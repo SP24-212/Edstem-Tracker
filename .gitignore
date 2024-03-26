@@ -1,0 +1,13 @@
+# enter the path/name of files that should be ignored by git
+
+# tests folder
+edstem/tests/
+
+# .VSCode
+.vscode/
+
+# .env to avoid pushing our personal keys to github
+.env
+
+# .DS_Store
+.DS_Store
