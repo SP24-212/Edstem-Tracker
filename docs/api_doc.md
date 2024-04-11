@@ -23,4 +23,4 @@ Once we have this token we create an edstem object.
 ed = EdAPI()
 ```
 
-with this edstem object we can now call a variety of functions from
+with this edstem object we can now call a variety of functions from the edstem API

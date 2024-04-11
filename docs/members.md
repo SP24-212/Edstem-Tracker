@@ -4,8 +4,12 @@
 ### Trevor Moy
 
 #### Contributions:
-- Working on edstem API to include lesson information
+- Working on Edstem API to include lesson information, challenge information, marking status information
+- Set up repository for version control
+- Discovered attributes/ elements for each data structure
  
+
+
 ---
 ### Luca Nero
 

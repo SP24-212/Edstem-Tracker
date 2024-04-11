@@ -8,7 +8,7 @@ For the Edstem-Lesson-Tracker project we use the following data structures and a
 mindmap
   root((DSA))
     Tim Sort
-    Priority Queue
+    Linked List
     Splay Tree
     Binary Heap 
     Red-Black Tree
@@ -30,7 +30,7 @@ A Binary Heap is a self balancing data structure that acts very similarly to a p
 
 
 ---
-### Priority Queue
+### Linked List
 
 
 ---
