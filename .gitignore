@@ -3,6 +3,12 @@
 # tests folder
 edstem/tests/
 
+# edstem data file
+edstem/integration/edstem-data/data.txt
+
+# cpp executables
+edstem/integration/storage/store-data
+
 # .VSCode
 .vscode/
 
