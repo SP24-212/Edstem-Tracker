@@ -32,9 +32,4 @@ class EATNode {
 
 };
 
-
-
-
-
-
 #endif // NODE_H
