@@ -1,5 +1,7 @@
 from edapi import EdAPI
 from colorama import Fore
+from datetime import datetime
+
 
 # initialize Ed API
 ed = EdAPI()
@@ -61,7 +63,7 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
           f.write(f"bhavl_course_id: {courses_with_lessons[k]}\n")
           f.write(f"bhavl_lesson_id: {str(ed_lesson['lessons'][i]['id'])}\n")
           try:
-            f.write(f"bhavl_due_at: {ed_lesson['lessons'][i]['title']}\n")
+            f.write(f"bhavl_due_at: {datetime.fromisoformat(ed_lesson['lessons'][i]['due_at']).strftime('%Y-%m-%d %H:%M:%S')}\n")
           except:
             f.write(f"bhavl_due_at: Unavailable\n")
           f.write(f"bhavl_type: {ed_lesson['lessons'][i]['type']}\n")
@@ -101,7 +103,7 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
           f.write(f"bhavl_course_id: {courses_with_lessons[k]}\n")
           f.write(f"bhavl_lesson_id: {str(ed_lesson['lessons'][i]['id'])}\n")
           try:
-            f.write(f"bhavl_due_at: {ed_lesson['lessons'][i]['title']}\n")
+            f.write(f"bhavl_due_at: {datetime.fromisoformat(ed_lesson['lessons'][i]['due_at']).strftime('%Y-%m-%d %H:%M:%S')}\n")
           except:
             f.write(f"bhavl_due_at: Unavailable\n")
           f.write(f"bhavl_type: {ed_lesson['lessons'][i]['type']}\n")
