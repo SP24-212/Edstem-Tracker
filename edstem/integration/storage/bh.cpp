@@ -23,7 +23,6 @@ void BinaryHeap::heapify(int index) {
     if (left < heapSize && heap[left]->data.first < heap[smallest]->data.first) {
         smallest = left;
     }
-
     if (right < heapSize && heap[right]->data.first < heap[smallest]->data.first) {
         smallest = right;
     }
