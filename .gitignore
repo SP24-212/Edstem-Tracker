@@ -11,3 +11,6 @@ edstem/tests/
 
 # .DS_Store
 .DS_Store
+
+/edstem/integration/edstem-data/data.txt
+/edstem/integration/storage/store-data
