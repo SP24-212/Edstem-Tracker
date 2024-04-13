@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: ask the user to follow a link to get authentication token. Then create a .env file with the token and then run python.
+
 # Run the python file to collect the data from edstem.
 python3 edstem/integration/get_data.py
 
