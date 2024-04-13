@@ -30,6 +30,9 @@ class EATNode {
     // Destructor
     ~EATNode();
 
+
+    // Friend classes
+    friend class BinaryHeap;
 };
 
 #endif // NODE_H

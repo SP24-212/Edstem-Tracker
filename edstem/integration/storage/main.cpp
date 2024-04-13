@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
+#include "bh.h"
 
 int main(int argc, char* argv[]) {
 
