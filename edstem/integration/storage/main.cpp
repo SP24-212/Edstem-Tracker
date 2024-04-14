@@ -37,50 +37,47 @@ int main(int argc, char* argv[]) {
             // check if there is new course id
             if (line.substr(0, 12) == "st_course_id") {
 
-                // if vector is empty or first line is true
+                // if vector is empty
                 if (!st_course_data.empty()) {
                     // create a new node
                     EATNode* node = new EATNode(st_course_key, st_course_data);
-
                     // insert the data into the splay tree
                     st->insert(node);
                     st_course_data.clear();
                 }
 
-
+                // create the new course key
                 st_course_key = std::stoi(line.substr(15, line.length() - 2));
 
-                // now we need to get the course id from the line
                 
             }
         
-            // implement code to sort the data for student
-
             std::stringstream streamline(line);
             std::string word;
-
             std::string phrase;
             bool in_quotes = false;
 
-
+            // iterate through the line - we iterate through the line to get the data in the quotes
             for (char c : line) {
                 if (c == '\'') {
                     in_quotes = !in_quotes;
                     if (!in_quotes && !phrase.empty()) {
-                        // std::cout << phrase << std::endl;
                         
                         st_course_data.push_back(phrase);
 
                         phrase.clear();
                     }
-                } else if (in_quotes) {
+                } 
+                // if we are not in quotes we add the character to the phrase
+                else if (in_quotes) {
                     phrase += c;
                 }
             }
             
-            
-
-        } else if (line.substr(0, 5) == "bhavl") {
+        
+        } 
+        
+        else if (line.substr(0, 5) == "bhavl") {
             // Since we can't technically determine the next line we create the remaining splay tree node here
                 if (!st_course_data.empty()) {
                     // create a new node
@@ -99,6 +96,12 @@ int main(int argc, char* argv[]) {
     
     // print the splay tree
     st->printSplayTree();
+
+
+
+    
+    // We will ask the user to decide if they want to get the data for a specific course
+    
 
     return 0;
 }
