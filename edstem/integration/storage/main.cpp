@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
+#include "bh.h"
 
 #include "node.cpp"
 #include "st.cpp"

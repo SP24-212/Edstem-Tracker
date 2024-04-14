@@ -36,6 +36,9 @@ class EATNode {
     ~EATNode();
 
 
+
+    // Friend classes
+    friend class BinaryHeap;
     friend class SplayTree;
 };
 
