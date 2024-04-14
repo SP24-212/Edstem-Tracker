@@ -33,8 +33,7 @@ void BinaryHeap::heapify(int index) {
     }
 }
 
-void BinaryHeap::insert(int key, std::vector<std::string> contents) {
-    EATNode* node = new EATNode(key, contents);
+void BinaryHeap::insert(EATNode* node) {
     if (heapSize == heap.size()) {
         resize(heapSize + 1);
     }

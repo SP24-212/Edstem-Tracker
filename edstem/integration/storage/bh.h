@@ -36,7 +36,7 @@ class BinaryHeap {
 
     BinaryHeap();
     ~BinaryHeap();
-    void insert(int key, std::vector<std::string> contents);
+    void insert(EATNode* node);
     EATNode* find(int key);
     EATNode* extractMin();
     void printBinaryHeap();
