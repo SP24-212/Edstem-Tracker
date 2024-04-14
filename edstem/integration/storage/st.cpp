@@ -1,5 +1,8 @@
 #include "st.h"
 
+#define RESET   "\033[0m"
+#define GREEN   "\033[32m"
+
 // Constructor
 SplayTree::SplayTree() {
     this->root = nullptr;
@@ -162,7 +165,7 @@ void SplayTree::inorderTraversal(EATNode* node) {
         return;
     }
     inorderTraversal(node->left);
-    std::cout << "Key: " << node->data.first << ", Contents: ";
+    std::cout << "Key: "<< GREEN << node->data.first << RESET << ", Contents: ";
     for (size_t i = 0; i < node->data.second.size(); ++i) {
         std::cout << node->data.second[i];
         if (i != node->data.second.size() - 1) {

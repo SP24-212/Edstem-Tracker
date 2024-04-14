@@ -3,6 +3,10 @@
 #include <vector>
 #include <algorithm> // For std::swap
 
+#define RESET   "\033[0m"
+#define GREEN   "\033[32m"
+
+
 BinaryHeap::BinaryHeap() : heapSize(0) {}
 
 BinaryHeap::~BinaryHeap() {
@@ -65,7 +69,7 @@ EATNode* BinaryHeap::extractMin() {
 
 void BinaryHeap::printBinaryHeap() {
     for (int i = 0; i < heapSize; i++) {
-        std::cout << "Contents: [";
+        std::cout << "Key: " << GREEN << heap[i]->data.first << RESET << " Contents: [";
         for (const auto& s : heap[i]->data.second) {
             std::cout << s << " ";
         }

@@ -91,26 +91,33 @@ int main(int argc, char* argv[]) {
                 // insert the data into the splay tree
                 st->insert(node);
                 st_course_data.clear();
+                course_ids.push_back(0); // Add a dummy value to the course_ids vector
             }
 
-        if (line.substr(0, 15) == "bhavl_lesson_id") {
-            int idStartIndex = 18;
-            int idLength = line.length() - idStartIndex - 1; // Adjusting to remove the trailing quote
-                for (size_t i = 0; i < course_ids.size(); i++)
-                {
-                    /* 
-                    Checks list of courses for the current course id, if not found, we add it to the list
-                    A new binary heap is created for each course that is not in the list.
-                    */
-                    if (std::stoi(line.substr(19, line.length() - 2)) == course_ids[i])
-                    {
-                        break;
-                    }
-                    else{
-                        course_ids.push_back(std::stoi(line.substr(19, line.length() - 2)));
-                        bh = new BinaryHeap();
-                    }
+            
+            // check if the line starts with bhavl_course_id
+            if (line.substr(0, 15) == "bhavl_course_id") {
+                // Extract the course id from the line
+                size_t idStartIndex = line.find(":") + 3; // Find the position of ':' and add 2 to skip it and the space after it
+                size_t idEndIndex = line.find('\n') - 2; // Find the position of newline character
+                std::string courseIdStr = line.substr(idStartIndex, idEndIndex - idStartIndex); // Extract the substring containing the course id
+                int courseId = std::stoi(courseIdStr); // Convert the substring to an integer
+
+
+                // Check if the course id is not already in the vector
+                if (std::find(course_ids.begin(), course_ids.end(), courseId) == course_ids.end()) {
+                    // Add the new course id to the vector
+                    course_ids.push_back(courseId);
+                    // Create a new BinaryHeap for this course id
+                    bh = new BinaryHeap();
                 }
+            }
+
+
+            if (line.substr(0, 15) == "bhavl_lesson_id") {
+
+                int idStartIndex = 18;
+                int idLength = line.length() - idStartIndex - 1; // Adjusting to remove the trailing quote
                 /* 
                     if vector is empty
                     create a new node
@@ -122,46 +129,53 @@ int main(int argc, char* argv[]) {
                     bhavl_lesson_data.clear();
                 }
 
-                // creates the new course key
+                // creates the new lesson key
                 bhavl_lesson_key = std::stoi(line.substr(idStartIndex, idLength));
                 
-            }
-        
-            std::stringstream streamline(line);
-            std::string word;
-            std::string phrase;
-            bool in_quotes = false;
-
-            // iterate through the line - we iterate through the line to get the data in the quotes
-            for (char c : line) {
-                if (c == '\'') {
-                    in_quotes = !in_quotes;
-                    if (!in_quotes && !phrase.empty()) {
-                        
-                        st_course_data.push_back(phrase);
-
-                        phrase.clear();
-                    }
-                } 
-                // if we are not in quotes we add the character to the phrase
-                else if (in_quotes) {
-                    phrase += c;
                 }
-            }
+        
+                std::stringstream streamline(line);
+                std::string word;
+                std::string phrase;
+                bool in_quotes = false;
+
+                // iterate through the line - we iterate through the line to get the data in the quotes
+                for (char c : line) {
+                    if (c == '\'') {
+                        in_quotes = !in_quotes;
+                        if (!in_quotes && !phrase.empty()) {
+                            
+                            bhavl_lesson_data.push_back(phrase);
+
+                            phrase.clear();
+                        }
+                    } 
+                    // if we are not in quotes we add the character to the phrase
+                    else if (in_quotes) {
+                        phrase += c;
+                    }
+                }
 
             // implement code to sort the data for bhavl
             // std::cout << "Binary Heap / AVL tree" << std::endl;
         }
         
     }
-    
+    // clear the vectors
+    course_ids.clear();
 
 
     // print the splay tree
     st->printSplayTree();
 
+    std::cout << "====================" << std::endl;
+
+    // print the binary heap
+    bh->printBinaryHeap();
+
     
     // We will ask the user to decide if they want to get the data for a specific course
+    
     
 
     return 0;
