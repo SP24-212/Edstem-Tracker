@@ -136,5 +136,44 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
             f.write(f"bhavl_user_score: {user_score}\n")
             f.write(f"bhavl_potential_score: {possible_score}\n")
 
+      # FOR GENERAL LESSONS
+      else:
+
+        f.write(f"bhavl_course_id: {courses_with_lessons[k]}\n")
+        f.write(f"bhavl_lesson_id: {str(ed_lesson['lessons'][i]['id'])}\n")
+        try:
+          f.write(f"bhavl_due_at: {datetime.fromisoformat(ed_lesson['lessons'][i]['due_at']).strftime('%Y-%m-%d %H:%M:%S')}\n")
+        except:
+          f.write(f"bhavl_due_at: Unavailable\n")
+        
+        # Print out the rest of the information
+        f.write(f"bhavl_type: {ed_lesson['lessons'][i]['type']}\n")
+        f.write(f"bhavl_openable: {ed_lesson['lessons'][i]['openable']}\n")
+        f.write(f"bhavl_title: {ed_lesson['lessons'][i]['title']}\n")
+
+        # get the lesson content
+        lesson_content = ed.get_lesson_content(ed_lesson['lessons'][i]['id'])
+
+        # get attempt id
+        attempt_id = lesson_content['lesson']['attempt_id']
+        
+        # try to get the attempt id
+        try:
+          marking_info = ed.get_marking_status(ed_lesson['lessons'][i]['id'], attempt_id)
+        except:
+          continue
+        else:
+          possible_score = 0
+          user_score = 0
+          for j in range(len(marking_info['lesson_markable_marking_status'])):
+            possible_score += marking_info['lesson_markable_marking_status'][j]['total_points']
+            user_score += marking_info['lesson_markable_marking_status'][j]['count_marked'] # kinda weird but we can keep this here for now
+
+        # print the user's score and the total possible score
+          f.write(f"bhavl_user_score: {user_score}\n")
+          f.write(f"bhavl_potential_score: {possible_score}\n")
+
+
+
 # tell user the data is now being stored and sorted
 print(Fore.GREEN + "Data has been stored and sorted" + Fore.RESET)
