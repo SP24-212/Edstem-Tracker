@@ -13,7 +13,6 @@ mindmap
 ```
 ## Descriptions and Explanations 
 
-
 ### Binary Heap
 
 **Description**
@@ -22,28 +21,42 @@ A Binary Heap is a self balancing data structure that acts very similarly to a p
 
 <!--change these later-->
 ```mermaid
----
-title: Binary Heap
----
 classDiagram
 class BinaryHeap {
-    - heap_list: List
-    - current_size: int
-    + insert(value: int): void
-    + percolate_up(i: int): void
-    + delete_min(): int
-    + percolate_down(i: int): void
-    + min_child(i: int): int
-    + peek_min(): int
-    + is_empty(): bool
-    + size(): int
+  -std::vector<EATNode*> heap
+  -int heapSize
+  -void resize(int newSize)
+  -void heapify(int index)
+  +BinaryHeap()
+  +~BinaryHeap()
+  +void insert(int key, std::vector<std::string> contents)
+  +EATNode* find(int key)
+  +EATNode* extractMin()
+  +void printBinaryHeap()
 }
 ```
 
 ---
 ### Splay Tree
 
-
+```mermaid
+classDiagram
+class SplayTree {
+  -EATNode* root
+  -void splay(EATNode* node)
+  -EATNode* findNode(int key)
+  -void rotateRight(EATNode* node)
+  -void rotateLeft(EATNode* node)
+  -void deleteSplayTree(EATNode* node)
+  -void inorderTraversal(EATNode* node)
+  +SplayTree()
+  +~SplayTree()
+  +void insert(EATNode* node)
+  +void remove(int key)
+  +EATNode* search(int key)
+  +void printSplayTree()
+}
+```
 ---
 ### AVL Tree
 
