@@ -19,6 +19,7 @@ mindmap
 A Binary Heap is a self balancing data structure that acts very similarly to a priority queue with binary search tree qualities
 
 
+#### Class Diagram
 <!--change these later-->
 ```mermaid
 classDiagram
@@ -39,6 +40,7 @@ class BinaryHeap {
 ---
 ### Splay Tree
 
+#### Class Diagram
 ```mermaid
 classDiagram
 class SplayTree {
