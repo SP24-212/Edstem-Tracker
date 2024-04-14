@@ -19,7 +19,6 @@ int main(int argc, char* argv[]) {
     // create course key for splay tree
     int st_course_key;
 
-    int test_count;
 
     // Declare a splay tree
     SplayTree* st = new SplayTree();
@@ -99,8 +98,10 @@ int main(int argc, char* argv[]) {
 
 
 
+    // Ask the user if they want to see course data, all lesson data for a specified course, or all lesson data for all courses
+    // They have the option to sort/filter the data in the lessons by the name of lesson id, the number of points it's worth, 
+
     
-    // We will ask the user to decide if they want to get the data for a specific course
     
 
     return 0;
