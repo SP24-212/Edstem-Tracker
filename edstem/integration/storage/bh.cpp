@@ -65,7 +65,7 @@ EATNode* BinaryHeap::extractMin() {
 
 void BinaryHeap::printBinaryHeap() {
     for (int i = 0; i < heapSize; i++) {
-        std::cout << "Key: " << heap[i]->data.first << ", Contents: [";
+        std::cout << "Contents: [";
         for (const auto& s : heap[i]->data.second) {
             std::cout << s << " ";
         }

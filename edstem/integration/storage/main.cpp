@@ -94,60 +94,59 @@ int main(int argc, char* argv[]) {
             }
 
         if (line.substr(0, 15) == "bhavl_lesson_id") {
-            
-            // std::cout << "Binary Heap / AVL tree" << std::endl;
-            std::cout << line.substr(19, line.length() - 2) << std::endl;
-            //     for (size_t i = 0; i < course_ids.size(); i++)
-            //     {
-            //         /* 
-            //         Checks list of courses for the current course id, if not found, we add it to the list
-            //         A new binary heap is created for each course that is not in the list.
-            //         */
-            //         if (std::stoi(line.substr(19, line.length() - 2)) == course_ids[i])
-            //         {
-            //             break;
-            //         }
-            //         else{
-            //             course_ids.push_back(std::stoi(line.substr(19, line.length() - 2)));
-            //             bh = new BinaryHeap();
-            //         }
-            //     }
-            //     /* 
-            //         if vector is empty
-            //         create a new node
-            //         insert the data into the splay tree
-            //     */
-            //     if (!bhavl_lesson_data.empty()) {
-            //         EATNode* node = new EATNode(bhavl_lesson_key, bhavl_lesson_data);
-            //         bh->insert(node);
-            //         bhavl_lesson_data.clear();
-            //     }
+            int idStartIndex = 18;
+            int idLength = line.length() - idStartIndex - 1; // Adjusting to remove the trailing quote
+                for (size_t i = 0; i < course_ids.size(); i++)
+                {
+                    /* 
+                    Checks list of courses for the current course id, if not found, we add it to the list
+                    A new binary heap is created for each course that is not in the list.
+                    */
+                    if (std::stoi(line.substr(19, line.length() - 2)) == course_ids[i])
+                    {
+                        break;
+                    }
+                    else{
+                        course_ids.push_back(std::stoi(line.substr(19, line.length() - 2)));
+                        bh = new BinaryHeap();
+                    }
+                }
+                /* 
+                    if vector is empty
+                    create a new node
+                    insert the data into the splay tree
+                */
+                if (!bhavl_lesson_data.empty()) {
+                    EATNode* node = new EATNode(bhavl_lesson_key, bhavl_lesson_data);
+                    bh->insert(node);
+                    bhavl_lesson_data.clear();
+                }
 
-            //     // creates the new course key
-            //     bhavl_lesson_key = std::stoi(line.substr(19, line.length() - 2));
+                // creates the new course key
+                bhavl_lesson_key = std::stoi(line.substr(idStartIndex, idLength));
                 
-            // }
+            }
         
-            // std::stringstream streamline(line);
-            // std::string word;
-            // std::string phrase;
-            // bool in_quotes = false;
+            std::stringstream streamline(line);
+            std::string word;
+            std::string phrase;
+            bool in_quotes = false;
 
-            // // iterate through the line - we iterate through the line to get the data in the quotes
-            // for (char c : line) {
-            //     if (c == '\'') {
-            //         in_quotes = !in_quotes;
-            //         if (!in_quotes && !phrase.empty()) {
+            // iterate through the line - we iterate through the line to get the data in the quotes
+            for (char c : line) {
+                if (c == '\'') {
+                    in_quotes = !in_quotes;
+                    if (!in_quotes && !phrase.empty()) {
                         
-            //             st_course_data.push_back(phrase);
+                        st_course_data.push_back(phrase);
 
-            //             phrase.clear();
-            //         }
-            //     } 
-            //     // if we are not in quotes we add the character to the phrase
-            //     else if (in_quotes) {
-            //         phrase += c;
-            //     }
+                        phrase.clear();
+                    }
+                } 
+                // if we are not in quotes we add the character to the phrase
+                else if (in_quotes) {
+                    phrase += c;
+                }
             }
 
             // implement code to sort the data for bhavl
