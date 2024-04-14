@@ -12,7 +12,7 @@ class EATNode {
     private:
 
     // Data stored in the node as a pair of key and vector of values
-    std::pair<int, std::vector<std::string> > data;
+    std::pair<int, std::pair<std::vector<std::string>, void*> > data;
 
     // Since we will know the position of everything in the vector we know whether we need to use stoi or if the value is a string we can just return a bool
     
@@ -23,8 +23,6 @@ class EATNode {
     // Parent pointer - to be used in the splay operation
     EATNode* parent;
 
-   
-
     // Public Members
     public:
 
@@ -34,7 +32,6 @@ class EATNode {
 
     // Destructor
     ~EATNode();
-
 
     friend class SplayTree;
 };

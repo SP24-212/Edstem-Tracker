@@ -97,9 +97,16 @@ int main(int argc, char* argv[]) {
     // print the splay tree
     st->printSplayTree();
 
+    // FOR TESTING - delete later
+    SplayTree* test = new SplayTree();
 
+    st->add_bh_pointer(53506, test);
 
     
+    
+    //search function test
+    // st->add_bh_pointer(53506);
+
     // We will ask the user to decide if they want to get the data for a specific course
     
 
