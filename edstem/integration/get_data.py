@@ -138,17 +138,17 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
       # FOR GENERAL LESSONS
       else:
 
-        f.write(f"bhavl_course_id: {courses_with_lessons[k]}\n")
-        f.write(f"bhavl_lesson_id: {str(ed_lesson['lessons'][i]['id'])}\n")
+        f.write(f"bhavl_course_id: '{courses_with_lessons[k]}'\n")
+        f.write(f"bhavl_lesson_id: '{str(ed_lesson['lessons'][i]['id'])}'\n")
         try:
-          f.write(f"bhavl_due_at: {datetime.fromisoformat(ed_lesson['lessons'][i]['due_at']).strftime('%Y-%m-%d %H:%M:%S')}\n")
+          f.write(f"bhavl_due_at: '{datetime.fromisoformat(ed_lesson['lessons'][i]['due_at']).strftime('%Y-%m-%d %H:%M:%S')}'\n")
         except:
-          f.write(f"bhavl_due_at: Unavailable\n")
+          f.write(f"bhavl_due_at: 'Unavailable'\n")
         
         # Print out the rest of the information
-        f.write(f"bhavl_type: {ed_lesson['lessons'][i]['type']}\n")
-        f.write(f"bhavl_openable: {ed_lesson['lessons'][i]['openable']}\n")
-        f.write(f"bhavl_title: {ed_lesson['lessons'][i]['title']}\n")
+        f.write(f"bhavl_type: '{ed_lesson['lessons'][i]['type']}'\n")
+        f.write(f"bhavl_openable: '{ed_lesson['lessons'][i]['openable']}'\n")
+        f.write(f"bhavl_title: '{ed_lesson['lessons'][i]['title']}'\n")
 
         # get the lesson content
         lesson_content = ed.get_lesson_content(ed_lesson['lessons'][i]['id'])
@@ -169,8 +169,8 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
             user_score += marking_info['lesson_markable_marking_status'][j]['count_marked'] # kinda weird but we can keep this here for now
 
         # print the user's score and the total possible score
-          f.write(f"bhavl_user_score: {user_score}\n")
-          f.write(f"bhavl_potential_score: {possible_score}\n")
+          f.write(f"bhavl_user_score: '{user_score}'\n")
+          f.write(f"bhavl_potential_score: '{possible_score}'\n")
 
 
 

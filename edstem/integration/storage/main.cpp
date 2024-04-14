@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
         if (line.substr(0, 15) == "bhavl_lesson_id") {
             
             // std::cout << "Binary Heap / AVL tree" << std::endl;
-            std::cout << line.substr(18, line.length() - 3) << std::endl;
+            std::cout << line.substr(19, line.length() - 2) << std::endl;
             //     for (size_t i = 0; i < course_ids.size(); i++)
             //     {
             //         /* 
