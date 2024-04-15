@@ -12,32 +12,22 @@ AVLTree::~AVLTree() {
 }
 
 
-// Helper function to insert a node into the AVL tree
-EATNode* AVLTree::insert(EATNode* node) {
-
-    
-
+/// Helper function to insert a node into the AVL tree
+EATNode* AVLTree::insert(EATNode* root, EATNode* node) {
     // perform a normal BST insertion
-    if (node == nullptr) {
+    if (root == nullptr) {
         return node;
-    } else if (root == nullptr) {
-        root = node;
-        return root;
     }
     
     if (node->data.first < root->data.first) {
-        root->left = insert(root->left);
-    }
-    
-    else if (node->data.first > root->data.first) {
-        root->right = insert(root->right);
-    } 
-    
-    else {
+        root->left = insert(root->left, node);
+    } else if (node->data.first > root->data.first) {
+        root->right = insert(root->right, node);
+    } else {
+        // Duplicate keys are not allowed in AVL tree
         return root;
     }
 
-    
     // update height of this ancestor node
     root->height = 1 + std::max(getHeight(root->left), getHeight(root->right));
 
@@ -68,9 +58,15 @@ EATNode* AVLTree::insert(EATNode* node) {
         return rotateLeft(root);
     }
 
+    // return the (unchanged) root pointer
     return root;
-    
 }
+
+// Public function to insert a node into the AVL tree
+void AVLTree::insert(EATNode* node) {
+    root = insert(root, node);
+}
+
 
 // Helper function to search for a node in the AVL tree
 EATNode* AVLTree::search(EATNode* node, int key) {
@@ -139,20 +135,59 @@ int AVLTree::getBalance(EATNode* node) {
 }
 
 // Helper function to perform an inorder traversal of the AVL tree
+// Helper function to perform an inorder traversal of the AVL tree
 void AVLTree::inorderTraversal(EATNode* node) {
     if (node == nullptr) {
         return;
     }
     inorderTraversal(node->left);
-    std::cout << node->data.first << " ";
+    // Skip printing nodes with a key of 0
+    if (node->data.first != 0) {
+        std::cout << "Key: " << GREEN << node->data.first << RESET << " [";
+        for (int i = 0; i < node->data.second.first.size(); i++) {
+            // if i is 0 print Course ID in red and the data in white
+            if (i == 0) {
+            std::cout << RED << "Course ID: " << RESET << node->data.second.first[i] << " ";
+            }
+            // If i is 1: print Due Date: in RED
+            else if (i == 1) {
+            std::cout << RED << "Due Date: " << RESET << node->data.second.first[i] << " ";
+            }
+            // If i is 2: print Lesson Type: in RED
+            else if (i == 2) {
+            std::cout << RED << "Lesson Type: " << RESET << node->data.second.first[i] << " ";
+            }
+            // If i is 3: print Openable: in RED
+            else if (i == 3) {
+            std::cout << RED << "Openable: " << RESET << node->data.second.first[i] << " ";
+            }
+            // If i is 4: print Title: in RED
+            else if (i == 4) {
+            std::cout << RED << "Title: " << RESET << node->data.second.first[i] << " ";
+            }
+            // If i is 5: print Status: in RED
+            else if (i == 5) {
+            std::cout << RED << "Status: " << RESET << node->data.second.first[i] << " ";
+            } 
+            // If i is 6: print User Score: in RED
+            else if (i == 6) {
+            std::cout << RED << "User Score: " << RESET << node->data.second.first[i] << " ";
+            }
+            // If i is 7: print Potential Score: in RED
+            else if (i == 7) {
+            std::cout << RED << "Potential Score: " << RESET << node->data.second.first[i] << " ";
+            }
+        }
+        std::cout << "]" << std::endl;
+    }
     inorderTraversal(node->right);
 }
 
 // Public function to insert a node into the AVL tree
-void AVLTree::insert(int key, std::vector<std::string> contents) {
-    EATNode* node = new EATNode(key, contents);
-    root = insert(node);
-}
+// void AVLTree::insert(int key, std::vector<std::string> contents) {
+//     EATNode* node = new EATNode(key, contents);
+//     root = insert(node);
+// }
 
 // Public function to search for a node in the AVL tree
 EATNode* AVLTree::search(int key) {

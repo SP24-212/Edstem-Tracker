@@ -129,6 +129,10 @@ int main(int argc, char* argv[]) {
                     st->add_bh_pointer(courseId, bh);
 
                 }
+
+                // add course id to the AVL tree
+                EATNode* node = new EATNode(bhavl_lesson_key, bhavl_lesson_data);
+                avl->insert(node);
             }
 
 
@@ -144,7 +148,7 @@ int main(int argc, char* argv[]) {
                 if (!bhavl_lesson_data.empty()) {
                     EATNode* node = new EATNode(bhavl_lesson_key, bhavl_lesson_data);
                     bh->insert(node);
-                    avl->insert(bhavl_lesson_key, bhavl_lesson_data);
+                    avl->insert(node);
                     bhavl_lesson_data.clear();
                 }
 
@@ -188,17 +192,17 @@ int main(int argc, char* argv[]) {
     // std::cout << "====================" << std::endl;
 
     // To print the BinaryHeaps in the SplayTree we will iterate through the course_ids vector
-    for (int i = 0; i < course_ids.size(); i++) {
-        // Get the BinaryHeap pointer from the SplayTree
-        BinaryHeap* bh = (BinaryHeap*)st->get_bh_pointer(course_ids[i]);
-        // Print the BinaryHeap
-        // std::cout << "Pointer: " << bh << std::endl;
-        bh->printBinaryHeap();
-    }
+    // for (int i = 0; i < course_ids.size(); i++) {
+    //     // Get the BinaryHeap pointer from the SplayTree
+    //     BinaryHeap* bh = (BinaryHeap*)st->get_bh_pointer(course_ids[i]);
+    //     // Print the BinaryHeap
+    //     // std::cout << "Pointer: " << bh << std::endl;
+    //     bh->printBinaryHeap();
+    // }
 
 
     // print the AVL tree
-    // avl->printAVLTree();
+    avl->printAVLTree();
 
     // We will ask the user to decide if they want to get the data for a specific course
     
@@ -209,6 +213,7 @@ int main(int argc, char* argv[]) {
     delete st;
     // delete the binary heap
     delete bh;
+    delete avl;
 
     return 0;
 }

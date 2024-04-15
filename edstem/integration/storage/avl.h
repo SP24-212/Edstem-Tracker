@@ -10,10 +10,10 @@ class AVLTree{
     
     // root: A pointer to the root of the AVL tree
     EATNode* root;
-    // insert: A function that inserts a node with a given key and contents into the AVL tree
-    EATNode* insert(EATNode* node);
     // search: A function that searches for a node with a given key in the AVL tree
     EATNode* search(EATNode* node, int key);
+    // insert: A function that inserts a node with a given key and contents into the AVL tree
+    EATNode* insert(EATNode* node, EATNode* newNode);
     // rotateRight: A function that performs a right rotation on a node
     EATNode* rotateRight(EATNode* node);
     // rotateLeft: A function that performs a left rotation on a node
@@ -35,10 +35,10 @@ class AVLTree{
     AVLTree();
     // Destructor: Deletes all nodes in the AVL tree
     ~AVLTree();
-    // insert: Inserts a node with a given key and contents into the AVL tree
-    void insert(int key, std::vector<std::string> contents);
     // search: Searches for a node with a given key in the AVL tree
     EATNode* search(int key);
+    // insert: A function that inserts a node with a given key and contents into the AVL tree
+    void insert(EATNode* node);
     // printAVLTree: Prints the contents of the AVL tree in order
     void printAVLTree();
     // do remove later
