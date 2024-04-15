@@ -33,6 +33,8 @@ class EATNode {
     // Destructor
     ~EATNode();
 
+    // Friend classes
+    friend class BinaryHeap;
     friend class SplayTree;
 };
 
