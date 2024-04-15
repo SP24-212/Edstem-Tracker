@@ -26,6 +26,7 @@ class SplayTree{
     void rotateLeft(EATNode* node);
     void deleteSplayTree(EATNode* node);
     void inorderTraversal(EATNode* node);
+    EATNode* searchRecursive(EATNode* node, int key);
 
     public:
     /*
@@ -44,6 +45,7 @@ class SplayTree{
     void remove(int key);
     EATNode* search(int key);
     void printSplayTree();
+    void add_bh_pointer(int key, void* ptr);
 };
 
 #endif // ST_H
