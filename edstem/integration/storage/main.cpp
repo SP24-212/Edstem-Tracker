@@ -4,8 +4,12 @@
 #include <string>
 #include "bh.h"
 #include "bh.cpp"
+#include "avl.h"
 #include "node.cpp"
 #include "st.cpp"
+#include "avl.cpp"
+
+
 
 int main(int argc, char* argv[]) {
 
@@ -26,9 +30,11 @@ int main(int argc, char* argv[]) {
 
     int test_count;
 
-    // Declare a splay tree
+    // Declare the data structures
     SplayTree* st = new SplayTree();
     BinaryHeap* bh = new BinaryHeap();
+    AVLTree* avl = new AVLTree();
+
 
     while (std::getline(file, line)) {
 
@@ -91,7 +97,6 @@ int main(int argc, char* argv[]) {
                 // insert the data into the splay tree
                 st->insert(node);
                 st_course_data.clear();
-                course_ids.push_back(0); // Add a dummy value to the course_ids vector
             }
 
             
@@ -103,10 +108,19 @@ int main(int argc, char* argv[]) {
                 std::string courseIdStr = line.substr(idStartIndex, idEndIndex - idStartIndex); // Extract the substring containing the course id
                 int courseId = std::stoi(courseIdStr); // Convert the substring to an integer
 
+                // When we encounter the first course id the course_ids vector will be empty so we add the binary heap pointer to the SplayTree
+                if(course_ids.empty()) {
+                    // Add a dummy value to the course_ids vector
+                    course_ids.push_back(courseId);
+                    bh = new BinaryHeap();
+                    st->add_bh_pointer(courseId, bh);
+                }
 
-                // Check if the course id is not already in the vector
+
+                // Check if the course id is already in the vector - if it is not we add it
                 if (std::find(course_ids.begin(), course_ids.end(), courseId) == course_ids.end()) {
                     // Add the new course id to the vector
+                    
                     course_ids.push_back(courseId);
                     // Create a new BinaryHeap for this course id
                     bh = new BinaryHeap();
@@ -130,6 +144,7 @@ int main(int argc, char* argv[]) {
                 if (!bhavl_lesson_data.empty()) {
                     EATNode* node = new EATNode(bhavl_lesson_key, bhavl_lesson_data);
                     bh->insert(node);
+                    avl->insert(bhavl_lesson_key, bhavl_lesson_data);
                     bhavl_lesson_data.clear();
                 }
 
@@ -168,12 +183,12 @@ int main(int argc, char* argv[]) {
 
 
     // print the splay tree
-    st->printSplayTree();
+    // st->printSplayTree();
 
-    std::cout << "====================" << std::endl;
+    // std::cout << "====================" << std::endl;
 
     // To print the BinaryHeaps in the SplayTree we will iterate through the course_ids vector
-    for (int i = 1; i < course_ids.size(); i++) {
+    for (int i = 0; i < course_ids.size(); i++) {
         // Get the BinaryHeap pointer from the SplayTree
         BinaryHeap* bh = (BinaryHeap*)st->get_bh_pointer(course_ids[i]);
         // Print the BinaryHeap
@@ -181,6 +196,9 @@ int main(int argc, char* argv[]) {
         bh->printBinaryHeap();
     }
 
+
+    // print the AVL tree
+    // avl->printAVLTree();
 
     // We will ask the user to decide if they want to get the data for a specific course
     

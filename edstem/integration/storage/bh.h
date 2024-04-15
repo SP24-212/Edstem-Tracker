@@ -1,3 +1,5 @@
+#include <iostream>
+#include <vector>
 #include "node.h"
 
 #ifndef BH_H

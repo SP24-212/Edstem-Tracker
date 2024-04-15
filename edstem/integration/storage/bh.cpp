@@ -1,5 +1,7 @@
 #include "bh.h"
-
+#include <iostream>
+#include <vector>
+#include <algorithm> // For std::swap
 
 #define RESET   "\033[0m"
 #define GREEN   "\033[32m"

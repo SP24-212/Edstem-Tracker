@@ -11,32 +11,33 @@ AVLTree::~AVLTree() {
     deleteAllNodes(root);
 }
 
-// Helper function to delete all nodes in the AVL tree
-void AVLTree::deleteAllNodes(EATNode* node) {
-    if (node == nullptr) {
-        return;
-    }
-    deleteAllNodes(node->left);
-    deleteAllNodes(node->right);
-    delete node;
-}
 
 // Helper function to insert a node into the AVL tree
 EATNode* AVLTree::insert(EATNode* node) {
 
+    
+
     // perform a normal BST insertion
     if (node == nullptr) {
         return node;
+    } else if (root == nullptr) {
+        root = node;
+        return root;
     }
-
+    
     if (node->data.first < root->data.first) {
         root->left = insert(root->left);
-    } else if (node->data.first > root->data.first) {
+    }
+    
+    else if (node->data.first > root->data.first) {
         root->right = insert(root->right);
-    } else {
+    } 
+    
+    else {
         return root;
     }
 
+    
     // update height of this ancestor node
     root->height = 1 + std::max(getHeight(root->left), getHeight(root->right));
 
