@@ -31,6 +31,9 @@ class EATNode {
     // Parent pointer - to be used in the splay operation
     EATNode* parent;
 
+    // Height of the node - to be used in the AVL tree
+    int height;
+
     // Public Members
     public:
 
@@ -44,6 +47,7 @@ class EATNode {
     // Friend classes
     friend class BinaryHeap;
     friend class SplayTree;
+    friend class AVLTree;
 };
 
 #endif // NODE_H
