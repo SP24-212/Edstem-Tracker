@@ -168,7 +168,6 @@ void SplayTree::add_bh_pointer(int key, void* ptr) {
     if (node != nullptr) {
         node->data.second.second = ptr; // Assign the pointer to the second part of the data pair
     }
-    std::cout << ptr << std::endl;
 }
 
 // Helper function for inorder traversal
@@ -203,4 +202,15 @@ void SplayTree::deleteSplayTree(EATNode* node) {
     deleteSplayTree(node->right);
     delete node;
 }
+
+// Function to get the pointer of the binary heap
+void* SplayTree::get_bh_pointer(int key) {
+    EATNode* node = search(key); // Assuming `search` function is correctly implemented
+
+    if (node != nullptr) {
+        return node->data.second.second; // Return the pointer
+    }
+    return nullptr;
+}
+
 

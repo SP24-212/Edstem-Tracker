@@ -110,6 +110,10 @@ int main(int argc, char* argv[]) {
                     course_ids.push_back(courseId);
                     // Create a new BinaryHeap for this course id
                     bh = new BinaryHeap();
+
+                    // Add the BinaryHeap pointer to the SplayTree
+                    st->add_bh_pointer(courseId, bh);
+
                 }
             }
 
@@ -159,10 +163,8 @@ int main(int argc, char* argv[]) {
             // implement code to sort the data for bhavl
             // std::cout << "Binary Heap / AVL tree" << std::endl;
         }
-        
     }
-    // clear the vectors
-    course_ids.clear();
+
 
 
     // print the splay tree
@@ -170,23 +172,25 @@ int main(int argc, char* argv[]) {
 
     std::cout << "====================" << std::endl;
 
-    // print the binary heap
-    bh->printBinaryHeap();
+    // To print the BinaryHeaps in the SplayTree we will iterate through the course_ids vector
+    for (int i = 1; i < course_ids.size(); i++) {
+        // Get the BinaryHeap pointer from the SplayTree
+        BinaryHeap* bh = (BinaryHeap*)st->get_bh_pointer(course_ids[i]);
+        // Print the BinaryHeap
+        // std::cout << "Pointer: " << bh << std::endl;
+        bh->printBinaryHeap();
+    }
 
-  
-  // FOR TESTING - delete later
-    SplayTree* test = new SplayTree();
-
-    st->add_bh_pointer(53506, test);
-
-    
-    
-    //search function test
-    // st->add_bh_pointer(53506);
 
     // We will ask the user to decide if they want to get the data for a specific course
     
-    
+    // clear the vectors
+    course_ids.clear();
+
+    // delete the splay tree
+    delete st;
+    // delete the binary heap
+    delete bh;
 
     return 0;
 }

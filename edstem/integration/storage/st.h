@@ -46,6 +46,7 @@ class SplayTree{
     EATNode* search(int key);
     void printSplayTree();
     void add_bh_pointer(int key, void* ptr);
+    void* get_bh_pointer(int key);
 };
 
 #endif // ST_H
