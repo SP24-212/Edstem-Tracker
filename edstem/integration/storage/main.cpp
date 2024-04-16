@@ -183,7 +183,15 @@ int main(int argc, char* argv[]) {
     }
 
 
-
+   // ask user for past or upcoming lessons
+    std::string user_date;
+    std::cout << "Would you like to view past or upcoming lessons? (past or upcoming): ";
+    std::cin >> user_date;
+    if (user_date == "past") {
+        bh->heapifyByDate(false);
+    } else {
+        bh->heapifyByDate(true);
+    }
 
     // We will ask the user to decide if they want to get the data for a specific course
     int user_input;

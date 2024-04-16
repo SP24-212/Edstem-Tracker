@@ -2,6 +2,9 @@
 #include <iostream>
 #include <vector>
 #include <algorithm> // For std::swap
+#include <ctime>
+#include <sstream>
+
 
 #define RESET   "\033[0m"
 #define GREEN   "\033[32m"
@@ -119,3 +122,59 @@ EATNode* BinaryHeap::find(int key) {
     }
     return nullptr;
 }
+
+void BinaryHeap::heapifyByDate(int index, bool upcoming) {
+    std::string today = getTodayDate();
+
+    int left = 2 * index + 1;
+    int right = 2 * index + 2;
+    int smallest = index;
+
+    if (upcoming) {
+        // If the left child is greater than today's date and not "Unavailable"
+        if (left < heapSize && heap[left]->data.second.first[1] > today && heap[left]->data.second.first[1] != "Unavailable") {
+            smallest = left;
+        }
+        // If the right child is greater than today's date and not "Unavailable"
+        if (right < heapSize && heap[right]->data.second.first[1] > today && heap[right]->data.second.first[1] < heap[smallest]->data.second.first[1] && heap[right]->data.second.first[1] != "Unavailable") {
+            smallest = right;
+        }
+    } else {
+        // If the left child is less than today's date and not "Unavailable"
+        if (left < heapSize && heap[left]->data.second.first[1] < today && heap[left]->data.second.first[1] != "Unavailable") {
+            std::cout << heap[left]->data.second.first[1] << std::endl;
+            smallest = left;
+        }
+        // If the right child is less than today's date and not "Unavailable"
+        if (right < heapSize && heap[right]->data.second.first[1] < today && heap[right]->data.second.first[1] < heap[smallest]->data.second.first[1] && heap[right]->data.second.first[1] != "Unavailable") {
+            std::cout << heap[right]->data.second.first[1] << std::endl;
+            smallest = right;
+        }
+    }
+
+    if (smallest != index) {
+        std::swap(heap[index], heap[smallest]);
+        heapifyByDate(smallest, upcoming);
+    }
+}
+
+void BinaryHeap::heapifyByDate(bool upcoming) {
+    for (int i = heapSize / 2 - 1; i >= 0; i--) {
+        std::cout << i << std::endl;
+        heapifyByDate(i, upcoming);
+    }
+}
+
+std::string BinaryHeap::getTodayDate() {
+    std::time_t t = std::time(0);
+    std::tm* now = std::localtime(&t);
+
+    std::stringstream ss;
+    ss << (now->tm_year + 1900) << '-'
+       << (now->tm_mon + 1) << '-'
+       << now->tm_mday;
+
+    return ss.str();
+}
+
+

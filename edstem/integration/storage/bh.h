@@ -21,6 +21,10 @@ class BinaryHeap {
     int heapSize;
     void resize(int newSize);
     void heapify(int index);
+    void heapifyByDate(int index, bool upcoming);
+
+    
+    
 
     public:
     /*
@@ -40,9 +44,8 @@ class BinaryHeap {
     EATNode* find(int key);
     EATNode* extractMin();
     void printBinaryHeap();
-    // Other 
-
-
+    std::string getTodayDate();
+    void heapifyByDate(bool upcoming);
 
     
 };
