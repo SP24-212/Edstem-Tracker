@@ -2,10 +2,15 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstdlib>
 #include "bh.h"
 #include "bh.cpp"
+#include "avl.h"
 #include "node.cpp"
 #include "st.cpp"
+#include "avl.cpp"
+
+
 
 int main(int argc, char* argv[]) {
 
@@ -26,9 +31,11 @@ int main(int argc, char* argv[]) {
 
     int test_count;
 
-    // Declare a splay tree
+    // Declare the data structures
     SplayTree* st = new SplayTree();
     BinaryHeap* bh = new BinaryHeap();
+    AVLTree* avl = new AVLTree();
+
 
     while (std::getline(file, line)) {
 
@@ -91,7 +98,6 @@ int main(int argc, char* argv[]) {
                 // insert the data into the splay tree
                 st->insert(node);
                 st_course_data.clear();
-                course_ids.push_back(0); // Add a dummy value to the course_ids vector
             }
 
             
@@ -103,10 +109,19 @@ int main(int argc, char* argv[]) {
                 std::string courseIdStr = line.substr(idStartIndex, idEndIndex - idStartIndex); // Extract the substring containing the course id
                 int courseId = std::stoi(courseIdStr); // Convert the substring to an integer
 
+                // When we encounter the first course id the course_ids vector will be empty so we add the binary heap pointer to the SplayTree
+                if(course_ids.empty()) {
+                    // Add a dummy value to the course_ids vector
+                    course_ids.push_back(courseId);
+                    bh = new BinaryHeap();
+                    st->add_bh_pointer(courseId, bh);
+                }
 
-                // Check if the course id is not already in the vector
+
+                // Check if the course id is already in the vector - if it is not we add it
                 if (std::find(course_ids.begin(), course_ids.end(), courseId) == course_ids.end()) {
                     // Add the new course id to the vector
+                    
                     course_ids.push_back(courseId);
                     // Create a new BinaryHeap for this course id
                     bh = new BinaryHeap();
@@ -115,6 +130,10 @@ int main(int argc, char* argv[]) {
                     st->add_bh_pointer(courseId, bh);
 
                 }
+
+                // add course id to the AVL tree
+                EATNode* node = new EATNode(bhavl_lesson_key, bhavl_lesson_data);
+                avl->insert(node);
             }
 
 
@@ -130,6 +149,7 @@ int main(int argc, char* argv[]) {
                 if (!bhavl_lesson_data.empty()) {
                     EATNode* node = new EATNode(bhavl_lesson_key, bhavl_lesson_data);
                     bh->insert(node);
+                    avl->insert(node);
                     bhavl_lesson_data.clear();
                 }
 
@@ -159,31 +179,82 @@ int main(int argc, char* argv[]) {
                         phrase += c;
                     }
                 }
-
-            // implement code to sort the data for bhavl
-            // std::cout << "Binary Heap / AVL tree" << std::endl;
         }
     }
 
 
 
-    // print the splay tree
-    st->printSplayTree();
-
-    std::cout << "====================" << std::endl;
-
-    // To print the BinaryHeaps in the SplayTree we will iterate through the course_ids vector
-    for (int i = 1; i < course_ids.size(); i++) {
-        // Get the BinaryHeap pointer from the SplayTree
-        BinaryHeap* bh = (BinaryHeap*)st->get_bh_pointer(course_ids[i]);
-        // Print the BinaryHeap
-        // std::cout << "Pointer: " << bh << std::endl;
-        bh->printBinaryHeap();
-    }
-
 
     // We will ask the user to decide if they want to get the data for a specific course
-    
+    int user_input;
+    std::string user_splaytree_str;
+    int repeat_search = 1; // 1 is keep searching, 0 is done searching, 2 is keep searching but clear the terminal, 0 is done searching and clear the terminal
+    do{
+        // if repeat search is 2 and the system is not windows
+        if (repeat_search == 2) {
+            // If the system is unix/linux/mac
+            try{
+                system("clear");
+            } 
+            // If the system is windows run cls
+            catch (...) {
+                system("cls");
+            }
+        }
+        // ask if they want to see the splay tree to view the course ids
+        std::cout << "Would you like to see the splay tree to view the course ids? (y or n): ";
+        std::cin >> user_splaytree_str;
+
+        if (user_splaytree_str == "y") {
+            st->printSplayTree();
+        } else {
+            std::cout << "You have chosen not to view the splay tree." << std::endl;
+        }
+
+        // ask the user if they want to view the binary heap for a specific course or the AVL tree or if they're done
+
+        // user data structure type
+        std::string user_ds_type;
+
+        std::cout << "Would you like to view the binary heap for a specific course, the AVL tree to view all lesson data, or are you done? (bh, avl, or done): ";
+        std::cin >> user_ds_type;
+
+        // if the user wants to view the binary heap
+        if (user_ds_type == "bh") {
+            // ask the user for the course id
+            int user_course_id;
+            std::cout << "Please enter the course id you would like to view: ";
+            std::cin >> user_course_id;
+
+            // get the binary heap pointer from the splay tree
+            BinaryHeap* bh = (BinaryHeap*)st->get_bh_pointer(user_course_id);
+
+            // print the binary heap
+            bh->printBinaryHeap();
+        } else if (user_ds_type == "avl") {
+            // print the AVL tree
+            avl->printAVLTree();
+        } else {
+            std::cout << "" << std::endl;
+        }
+
+        // Ask the user if they would like to continue. If they do we will clear the terminal and start back at the splay tree
+        std::cout << "Would you like to continue searching? \n(1 for yes, 0 for no, 2 for yes and clear the terminal, 3 for no and clear the terminal)\nInput: ";
+        std::cin >> repeat_search;
+    } while (repeat_search == 1 || repeat_search == 2);
+
+    // if the user wants to clear the terminal
+    if (repeat_search == 3) {
+        // If the system is unix/linux/mac
+        try{
+            system("clear");
+        }
+        // If the system is windows run cls
+        catch (...) {
+            system("cls");
+        }
+    }
+
     // clear the vectors
     course_ids.clear();
 
@@ -191,6 +262,7 @@ int main(int argc, char* argv[]) {
     delete st;
     // delete the binary heap
     delete bh;
+    delete avl;
 
     return 0;
 }

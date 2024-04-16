@@ -1,5 +1,3 @@
-#include <iostream>
-#include <vector>
 #include "node.h"
 
 #ifndef ST_H
