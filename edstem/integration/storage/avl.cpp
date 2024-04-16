@@ -178,7 +178,7 @@ void AVLTree::inorderTraversal(EATNode* node) {
             std::cout << RED << "Potential Score: " << RESET << node->data.second.first[i] << " ";
             }
         }
-        std::cout << "]" << std::endl;
+        std::cout << "]" << std::endl << std::endl;
     }
     inorderTraversal(node->right);
 }

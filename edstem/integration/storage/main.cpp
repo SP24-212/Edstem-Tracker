@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstdlib>
 #include "bh.h"
 #include "bh.cpp"
 #include "avl.h"
@@ -178,34 +179,82 @@ int main(int argc, char* argv[]) {
                         phrase += c;
                     }
                 }
-
-            // implement code to sort the data for bhavl
-            // std::cout << "Binary Heap / AVL tree" << std::endl;
         }
     }
 
 
 
-    // print the splay tree
-    // st->printSplayTree();
-
-    // std::cout << "====================" << std::endl;
-
-    // To print the BinaryHeaps in the SplayTree we will iterate through the course_ids vector
-    // for (int i = 0; i < course_ids.size(); i++) {
-    //     // Get the BinaryHeap pointer from the SplayTree
-    //     BinaryHeap* bh = (BinaryHeap*)st->get_bh_pointer(course_ids[i]);
-    //     // Print the BinaryHeap
-    //     // std::cout << "Pointer: " << bh << std::endl;
-    //     bh->printBinaryHeap();
-    // }
-
-
-    // print the AVL tree
-    avl->printAVLTree();
 
     // We will ask the user to decide if they want to get the data for a specific course
-    
+    int user_input;
+    std::string user_splaytree_str;
+    int repeat_search = 1; // 1 is keep searching, 0 is done searching, 2 is keep searching but clear the terminal, 0 is done searching and clear the terminal
+    do{
+        // if repeat search is 2 and the system is not windows
+        if (repeat_search == 2) {
+            // If the system is unix/linux/mac
+            try{
+                system("clear");
+            } 
+            // If the system is windows run cls
+            catch (...) {
+                system("cls");
+            }
+        }
+        // ask if they want to see the splay tree to view the course ids
+        std::cout << "Would you like to see the splay tree to view the course ids? (y or n): ";
+        std::cin >> user_splaytree_str;
+
+        if (user_splaytree_str == "y") {
+            st->printSplayTree();
+        } else {
+            std::cout << "You have chosen not to view the splay tree." << std::endl;
+        }
+
+        // ask the user if they want to view the binary heap for a specific course or the AVL tree or if they're done
+
+        // user data structure type
+        std::string user_ds_type;
+
+        std::cout << "Would you like to view the binary heap for a specific course, the AVL tree to view all lesson data, or are you done? (bh, avl, or done): ";
+        std::cin >> user_ds_type;
+
+        // if the user wants to view the binary heap
+        if (user_ds_type == "bh") {
+            // ask the user for the course id
+            int user_course_id;
+            std::cout << "Please enter the course id you would like to view: ";
+            std::cin >> user_course_id;
+
+            // get the binary heap pointer from the splay tree
+            BinaryHeap* bh = (BinaryHeap*)st->get_bh_pointer(user_course_id);
+
+            // print the binary heap
+            bh->printBinaryHeap();
+        } else if (user_ds_type == "avl") {
+            // print the AVL tree
+            avl->printAVLTree();
+        } else {
+            std::cout << "" << std::endl;
+        }
+
+        // Ask the user if they would like to continue. If they do we will clear the terminal and start back at the splay tree
+        std::cout << "Would you like to continue searching? \n(1 for yes, 0 for no, 2 for yes and clear the terminal, 3 for no and clear the terminal)\nInput: ";
+        std::cin >> repeat_search;
+    } while (repeat_search == 1 || repeat_search == 2);
+
+    // if the user wants to clear the terminal
+    if (repeat_search == 3) {
+        // If the system is unix/linux/mac
+        try{
+            system("clear");
+        }
+        // If the system is windows run cls
+        catch (...) {
+            system("cls");
+        }
+    }
+
     // clear the vectors
     course_ids.clear();
 
