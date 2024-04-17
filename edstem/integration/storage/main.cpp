@@ -182,16 +182,6 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    // check if avl tree is balanced
-    if (avl->isBalanced()) {
-        std::cout << "The AVL tree is balanced." << std::endl;
-    } else {
-        std::cout << "The AVL tree is not balanced." << std::endl;
-    }
-
-    // visualize the AVL tree
-    avl->visualize();
-
 
     // We will ask the user to decide if they want to get the data for a specific course
     int user_input;
@@ -209,6 +199,7 @@ int main(int argc, char* argv[]) {
                 system("cls");
             }
         }
+
         // ask if they want to see the splay tree to view the course ids
         std::cout << "Would you like to see the splay tree to view the course ids? (y or n): ";
         std::cin >> user_splaytree_str;
@@ -242,6 +233,26 @@ int main(int argc, char* argv[]) {
         } else if (user_ds_type == "avl") {
             // print the AVL tree
             avl->printAVLTree();
+
+            std::cout << "Checking if the AVL tree is balanced..." << std::endl;
+            // check if the AVL tree is balanced
+            if (avl->isBalanced()) {
+                std::cout << "The AVL tree is balanced." << std::endl;
+            } else {
+                std::cout << "The AVL tree is not balanced." << std::endl;
+            }
+
+            // Ask the user if they would like to visualize the AVL tree
+            std::string visualize_avl;
+            std::cout << "Would you like to visualize the AVL tree? (y or n): ";
+            std::cin >> visualize_avl;
+            if (visualize_avl == "y") {
+                std::cout << "Visualizing the AVL tree..." << std::endl;
+                avl->visualize();
+            } else {
+                std::cout << "You have chosen not to visualize the AVL tree." << std::endl;
+            }
+            
         } else {
             std::cout << "" << std::endl;
         }
