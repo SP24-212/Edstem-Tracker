@@ -1,6 +1,29 @@
 from edapi import EdAPI
 from colorama import Fore
 from datetime import datetime
+import time
+
+# Print iterations progress
+def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=50, fill='█', printEnd='\r'):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        length      - Optional  : character length of bar (Int)
+        fill        - Optional  : bar fill character (Str)
+        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end=printEnd)
+    # Print New Line on Complete
+    if iteration == total:
+        print()
 
 # initialize Ed API
 ed = EdAPI()
@@ -18,6 +41,12 @@ courses = user_info['courses']
 
 # number of courses 
 num_courses = len(courses)
+
+
+# A List of Items
+items = list(range(0, 57))
+l = len(items)
+
 
 # implement color later
 
@@ -45,7 +74,9 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
       f.write(f"st_name: '{course['course']['name']}'\n")
       f.write(f"st_lessons: 'True'\n")
   # we iterate through the lessons in the courses with lessons
-
+  total_lessons = sum([len(ed.list_lessons(course_id)['lessons']) for course_id in courses_with_lessons])
+  processed_lessons = 0
+  printProgressBar(0, total_lessons, prefix = 'Progress:', suffix = 'Complete', length = 50)
   for k in range(len(courses_with_lessons)):
 
     ed_lesson = ed.list_lessons(courses_with_lessons[k])
@@ -54,6 +85,9 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
     num_lessons = len(ed_lesson['lessons'])
     
     for i in range(num_lessons):
+      # Update Progress Bar
+      processed_lessons += 1
+      printProgressBar(processed_lessons, total_lessons, prefix='Progress:', suffix='Complete', length=50)
       if ed_lesson['lessons'][i]['type'] != 'general':
         
 
@@ -172,6 +206,15 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
           f.write(f"bhavl_user_score: '{user_score}'\n")
           f.write(f"bhavl_potential_score: '{possible_score}'\n")
 
+
+    # # Update Progress Bar within the loop
+    # printProgressBar(0, l, prefix='Progress:', suffix='Complete', length=50)
+    # for i, item in enumerate(items):
+    #   # Do stuff...
+    #   time.sleep(0.1)
+    #   # Update Progress Bar
+    #   printProgressBar(i + 1, l, prefix='Progress:', suffix='Complete', length=50)      
+  
 
 
 # tell user the data is now being stored and sorted

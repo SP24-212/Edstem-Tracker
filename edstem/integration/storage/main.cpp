@@ -10,7 +10,7 @@
 #include "st.cpp"
 #include "avl.cpp"
 
-
+void clearTerminal();
 
 int main(int argc, char* argv[]) {
 
@@ -60,9 +60,7 @@ int main(int argc, char* argv[]) {
                 }
 
                 // create the new course key
-                st_course_key = std::stoi(line.substr(15, line.length() - 2));
-
-                
+                st_course_key = std::stoi(line.substr(15, line.length() - 2));           
             }
         
             std::stringstream streamline(line);
@@ -183,6 +181,8 @@ int main(int argc, char* argv[]) {
     }
 
 
+
+
     // We will ask the user to decide if they want to get the data for a specific course
     int user_input;
     std::string user_splaytree_str;
@@ -190,14 +190,7 @@ int main(int argc, char* argv[]) {
     do{
         // if repeat search is 2 and the system is not windows
         if (repeat_search == 2) {
-            // If the system is unix/linux/mac
-            try{
-                system("clear");
-            } 
-            // If the system is windows run cls
-            catch (...) {
-                system("cls");
-            }
+            clearTerminal();
         }
 
         // ask if they want to see the splay tree to view the course ids
@@ -264,14 +257,7 @@ int main(int argc, char* argv[]) {
 
     // if the user wants to clear the terminal
     if (repeat_search == 3) {
-        // If the system is unix/linux/mac
-        try{
-            system("clear");
-        }
-        // If the system is windows run cls
-        catch (...) {
-            system("cls");
-        }
+        clearTerminal();
     }
 
     // clear the vectors
@@ -286,3 +272,15 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
+
+// function to clear terminal
+void clearTerminal(){
+        // If the system is unix/linux/mac
+    try{
+        system("clear");
+    } 
+    // If the system is windows run cls
+    catch (...) {
+        system("cls");
+    }
+}
