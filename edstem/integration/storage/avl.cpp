@@ -1,4 +1,10 @@
 #include "avl.h"
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <vector>
+
 
 // Constructor
 AVLTree::AVLTree() {
@@ -208,4 +214,51 @@ void AVLTree::deleteAllNodes(EATNode* node) {
     deleteAllNodes(node->left);
     deleteAllNodes(node->right);
     delete node;
+}
+
+
+// Balance check function
+bool AVLTree::isBalanced(EATNode* node) {
+    if (node == nullptr) {
+        return true;
+    }
+    int balance = getBalance(node);
+    if (balance > 1 || balance < -1) {
+        return false;
+    }
+    return isBalanced(node->left) && isBalanced(node->right);
+}
+
+// Public function to check if the AVL tree is balanced
+bool AVLTree::isBalanced() {
+    return isBalanced(root);
+}
+
+// Visualize the AVL tree
+void AVLTree::visualize() {
+    std::string folderPath = "edstem/integration/edstem-data/";
+
+    std::ofstream file;
+    file.open(folderPath + "avl.dot");
+    file << "digraph AVL {" << std::endl;
+    visualizeHelper(root, file);
+    file << "}" << std::endl;
+    file.close();
+    system(("dot -Tpng " + folderPath + "avl.dot -o " + folderPath + "avl.png").c_str());
+    system(("open " + folderPath + "avl.png").c_str());
+}
+
+// Helper function to visualize the AVL tree
+void AVLTree::visualizeHelper(EATNode* node, std::ofstream& file) {
+    if (node == nullptr) {
+        return;
+    }
+    if (node->left != nullptr) {
+        file << node->data.first << " -> " << node->left->data.first << ";" << std::endl;
+    }
+    if (node->right != nullptr) {
+        file << node->data.first << " -> " << node->right->data.first << ";" << std::endl;
+    }
+    visualizeHelper(node->left, file);
+    visualizeHelper(node->right, file);
 }

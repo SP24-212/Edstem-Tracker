@@ -17,3 +17,8 @@ edstem/integration/storage/store-data
 
 # .DS_Store
 .DS_Store
+
+
+# images
+edstem/integration/edstem-data/avl.dot
+edstem/integration/edstem-data/avl.png

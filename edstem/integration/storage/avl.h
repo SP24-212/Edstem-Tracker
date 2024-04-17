@@ -26,7 +26,11 @@ class AVLTree{
     void inorderTraversal(EATNode* node);
     // deleteAllNodes: A function that deletes all nodes in the AVL tree
     void deleteAllNodes(EATNode* node);
-    // do remove later
+    // isBalanced: A function that checks if the AVL tree is balanced
+    bool isBalanced(EATNode* node);
+    // visualize helper function
+    void visualizeHelper(EATNode* node, std::ofstream& file);
+    
 
     // Public Members
     public:
@@ -42,6 +46,13 @@ class AVLTree{
     // printAVLTree: Prints the contents of the AVL tree in order
     void printAVLTree();
     // do remove later
+
+    // isBalanced: A function that checks if the AVL tree is balanced
+    bool isBalanced();
+
+    // visualize: A function that visualizes the AVL tree
+    void visualize();
+    
 
 };
 
