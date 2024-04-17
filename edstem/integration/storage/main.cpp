@@ -28,8 +28,8 @@ int main(int argc, char* argv[]) {
     // create course key for splay tree
     int st_course_key;
     int bhavl_lesson_key;
-
     int test_count;
+    int courseId;
 
     // Declare the data structures
     SplayTree* st = new SplayTree();
@@ -145,6 +145,8 @@ int main(int argc, char* argv[]) {
                     insert the data into the splay tree
                 */
                 if (!bhavl_lesson_data.empty()) {
+                    
+                    
                     EATNode* node = new EATNode(bhavl_lesson_key, bhavl_lesson_data);
                     bh->insert(node);
                     avl->insert(node);

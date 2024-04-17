@@ -206,16 +206,5 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
           f.write(f"bhavl_user_score: '{user_score}'\n")
           f.write(f"bhavl_potential_score: '{possible_score}'\n")
 
-
-    # # Update Progress Bar within the loop
-    # printProgressBar(0, l, prefix='Progress:', suffix='Complete', length=50)
-    # for i, item in enumerate(items):
-    #   # Do stuff...
-    #   time.sleep(0.1)
-    #   # Update Progress Bar
-    #   printProgressBar(i + 1, l, prefix='Progress:', suffix='Complete', length=50)      
-  
-
-
 # tell user the data is now being stored and sorted
 print(Fore.GREEN + "Data has been stored and sorted" + Fore.RESET)

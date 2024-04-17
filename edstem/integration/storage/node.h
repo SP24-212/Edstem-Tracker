@@ -1,5 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <vector>
+#include <chrono>
+#include <thread>
+
 
 #define RESET   "\033[0m"
 #define GREEN   "\033[32m"

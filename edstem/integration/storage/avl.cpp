@@ -1,9 +1,4 @@
 #include "avl.h"
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <string>
-#include <vector>
 
 
 // Constructor
@@ -151,12 +146,9 @@ void AVLTree::inorderTraversal(EATNode* node) {
     if (node->data.first != 0) {
         std::cout << "Key: " << GREEN << node->data.first << RESET << " [";
         for (int i = 0; i < node->data.second.first.size(); i++) {
-            // if i is 0 print Course ID in red and the data in white
-            if (i == 0) {
-            std::cout << RED << "Course ID: " << RESET << node->data.second.first[i] << " ";
-            }
+
             // If i is 1: print Due Date: in RED
-            else if (i == 1) {
+            if (i == 1) {
             std::cout << RED << "Due Date: " << RESET << node->data.second.first[i] << " ";
             }
             // If i is 2: print Lesson Type: in RED
@@ -185,15 +177,10 @@ void AVLTree::inorderTraversal(EATNode* node) {
             }
         }
         std::cout << "]" << std::endl << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
     inorderTraversal(node->right);
 }
-
-// Public function to insert a node into the AVL tree
-// void AVLTree::insert(int key, std::vector<std::string> contents) {
-//     EATNode* node = new EATNode(key, contents);
-//     root = insert(node);
-// }
 
 // Public function to search for a node in the AVL tree
 EATNode* AVLTree::search(int key) {
