@@ -26,6 +26,9 @@ class SplayTree{
     void inorderTraversal(EATNode* node);
     EATNode* searchRecursive(EATNode* node, int key);
 
+    int getHeight(EATNode* node);
+    bool isBalanced(EATNode* node);
+
     public:
     /*
     Public Members
@@ -45,6 +48,9 @@ class SplayTree{
     void printSplayTree();
     void add_bh_pointer(int key, void* ptr);
     void* get_bh_pointer(int key);
+    
+    bool isBalanced();
+
 };
 
 #endif // ST_H

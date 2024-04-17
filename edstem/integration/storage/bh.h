@@ -22,6 +22,11 @@ class BinaryHeap {
     void resize(int newSize);
     void heapify(int index);
 
+    int getHeight(EATNode* node);
+    int getBalance(EATNode* node);
+    bool isBalanced(EATNode* node);
+    bool hasTwoChildren(EATNode* node);
+
     public:
     /*
     Public Members:
@@ -39,12 +44,12 @@ class BinaryHeap {
     void insert(EATNode* node);
     EATNode* find(int key);
     EATNode* extractMin();
+
     void printBinaryHeap();
+    bool isBalanced();
+    
     // Other 
 
-
-
-    
 };
 
 

@@ -182,7 +182,6 @@ int main(int argc, char* argv[]) {
         }
     }
 
-
     // We will ask the user to decide if they want to get the data for a specific course
     int user_input;
     std::string user_splaytree_str;

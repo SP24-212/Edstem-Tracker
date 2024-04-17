@@ -116,7 +116,7 @@ EATNode* AVLTree::rotateLeft(EATNode* node) {
     rightChild->left = node;
     node->right = leftChild;
 
-    // update heights
+    // update
     node->height = std::max(getHeight(node->left), getHeight(node->right)) + 1;
     rightChild->height = std::max(getHeight(rightChild->left), getHeight(rightChild->right)) + 1;
 

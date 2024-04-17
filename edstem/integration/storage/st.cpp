@@ -213,4 +213,27 @@ void* SplayTree::get_bh_pointer(int key) {
     return nullptr;
 }
 
+// Function to get the height of a node
+int SplayTree::getHeight(EATNode* node) {
+  if (node == nullptr) {
+    return 0;
+  }
+  return 1 + std::max(getHeight(node->left), getHeight(node->right));
+}
+
+// Function to check if a node is balanced
+bool SplayTree::isBalanced(EATNode* node) {
+  if (node == nullptr) {
+    return true; // Empty tree is considered balanced
+  }
+  int leftHeight = getHeight(node->left);
+  int rightHeight = getHeight(node->right);
+  return abs(leftHeight - rightHeight) <= 1 && 
+         isBalanced(node->left) && isBalanced(node->right); // Check subtrees recursively
+}
+
+// Function to check if the Splay Tree is balanced
+bool SplayTree::isBalanced() {
+  return isBalanced(root);
+}
 
