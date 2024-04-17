@@ -182,7 +182,15 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    // check if avl tree is balanced
+    if (avl->isBalanced()) {
+        std::cout << "The AVL tree is balanced." << std::endl;
+    } else {
+        std::cout << "The AVL tree is not balanced." << std::endl;
+    }
 
+    // visualize the AVL tree
+    avl->visualize();
 
 
     // We will ask the user to decide if they want to get the data for a specific course
