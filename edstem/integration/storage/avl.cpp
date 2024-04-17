@@ -250,13 +250,13 @@ void AVLTree::visualize() {
 
 // Helper function to visualize the AVL tree
 void AVLTree::visualizeHelper(EATNode* node, std::ofstream& file) {
-    if (node == nullptr) {
+    if (node == nullptr || node->data.first == 0) {
         return;
     }
-    if (node->left != nullptr) {
+    if (node->left != nullptr && node->left->data.first != 0) {
         file << node->data.first << " -> " << node->left->data.first << ";" << std::endl;
     }
-    if (node->right != nullptr) {
+    if (node->right != nullptr && node->right->data.first != 0) {
         file << node->data.first << " -> " << node->right->data.first << ";" << std::endl;
     }
     visualizeHelper(node->left, file);
