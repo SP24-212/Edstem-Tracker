@@ -137,49 +137,43 @@ int AVLTree::getBalance(EATNode* node) {
 
 // Helper function to perform an inorder traversal of the AVL tree
 // Helper function to perform an inorder traversal of the AVL tree
-void AVLTree::inorderTraversal(EATNode* node) {
+void AVLTree::inorderTraversal(EATNode* node, int filter, int specifier, std::vector<std::string> &types) {
     if (node == nullptr) {
         return;
     }
-    inorderTraversal(node->left);
+    inorderTraversal(node->left, filter, specifier, types);
     // Skip printing nodes with a key of 0
     if (node->data.first != 0) {
         std::cout << "Key: " << GREEN << node->data.first << RESET << " [";
         for (int i = 0; i < node->data.second.first.size(); i++) {
+            // Filter out the data based on the filter
+            if (filter == 0) { // no filter
+                checkCol(node, i);
+            }
+            // if the filter is 1 and the current type is equal to the specifier
+            else if (filter == 1 && types[specifier] == node->data.second.first[i]) { // filter by type
+                checkCol(node, i);
+            }
+            
+            else if (filter == 2) { // filter by due_date
+                checkCol(node, i);
+            }
 
-            // If i is 1: print Due Date: in RED
-            if (i == 1) {
-            std::cout << RED << "Due Date: " << RESET << node->data.second.first[i] << " ";
+            else if (filter == 3) { // filter by grade
+                checkCol(node, i);
             }
-            // If i is 2: print Lesson Type: in RED
-            else if (i == 2) {
-            std::cout << RED << "Lesson Type: " << RESET << node->data.second.first[i] << " ";
+            else if (filter == 4) { // filter by open
+                checkCol(node, i);
             }
-            // If i is 3: print Openable: in RED
-            else if (i == 3) {
-            std::cout << RED << "Openable: " << RESET << node->data.second.first[i] << " ";
+            else if (filter == 5) { // filter by attempted
+                checkCol(node, i);
             }
-            // If i is 4: print Title: in RED
-            else if (i == 4) {
-            std::cout << RED << "Title: " << RESET << node->data.second.first[i] << " ";
-            }
-            // If i is 5: print Status: in RED
-            else if (i == 5) {
-            std::cout << RED << "Status: " << RESET << node->data.second.first[i] << " ";
-            } 
-            // If i is 6: print User Score: in RED
-            else if (i == 6) {
-            std::cout << RED << "User Score: " << RESET << node->data.second.first[i] << " ";
-            }
-            // If i is 7: print Potential Score: in RED
-            else if (i == 7) {
-            std::cout << RED << "Potential Score: " << RESET << node->data.second.first[i] << " ";
-            }
+
         }
         std::cout << "]" << std::endl << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
-    inorderTraversal(node->right);
+    inorderTraversal(node->right, filter, specifier, types);
 }
 
 // Public function to search for a node in the AVL tree
@@ -188,9 +182,48 @@ EATNode* AVLTree::search(int key) {
 }
 
 // Public function to print the contents of the AVL tree in order
-void AVLTree::printAVLTree() {
-    inorderTraversal(root);
-    std::cout << std::endl;
+void AVLTree::printAVLTree(int filter) {
+    // we do each type of filter depending on the int passed in
+    // 0 is no filter
+    // filters are 1: type, 2: due_date, 3: grade, 4: open, 5: attempted.
+    
+    // create empty vector to store types
+    std::vector<std::string> types;
+    // specifier starts at -1
+    int specifier = -1;
+
+    // when the print tree is called and filter is 0 just print tree like normal
+    if (filter == 0) {
+        inorderTraversal(root, filter, specifier, types);
+        std::cout << std::endl;
+    }
+    // when the print tree is called and filter is 1 filter by type
+    else if (filter == 1) {
+        printAllTypes();
+        std::cout << std::endl;
+    }
+    // when the print tree is called and filter is 2 filter by due_date
+    else if (filter == 2) {
+        // tell them we are filtering out unavailable due dates
+        std::cout << "Filtering out unavailable due dates" << std::endl;
+        inorderTraversal(root, filter, specifier, types);
+        std::cout << std::endl;
+    }
+    // when the print tree is called and filter is 3 filter by grade
+    else if (filter == 3) {
+        inorderTraversal(root, filter);
+        std::cout << std::endl;
+    }
+    // when the print tree is called and filter is 4 filter by open
+    else if (filter == 4) {
+        inorderTraversal(root, filter);
+        std::cout << std::endl;
+    }
+    // when the print tree is called and filter is 5 filter by attempted
+    else if (filter == 5) {
+        inorderTraversal(root, filter);
+        std::cout << std::endl;
+    }
 }
 
 // Helper function to delete all nodes in the AVL tree
@@ -248,4 +281,113 @@ void AVLTree::visualizeHelper(EATNode* node, std::ofstream& file) {
     }
     visualizeHelper(node->left, file);
     visualizeHelper(node->right, file);
+}
+
+// Function to return the available filters for users
+void AVLTree::printFilters() {
+    std::cout << "Available filters: " << std::endl;
+    std::cout << "1: type" << std::endl;
+    std::cout << "2: due_date" << std::endl;
+    std::cout << "3: grade" << std::endl;
+    std::cout << "4: open" << std::endl;
+    std::cout << "5: attempted" << std::endl;
+}
+
+// function to print 1 of every lesson type
+void AVLTree::printAllTypes() {
+    // we are only going to print 1 of each lesson type (i.e. cpp, python, java, etc.)
+    
+    // call private helper function to print all types
+    std::vector<std::string> types;
+    printAllTypesHelper(root, types);
+    int filtertype;
+    // since we have all the types in the vector we can let the user pick which ones they want to filter by
+    std::cout << "Please enter the number of the type you would like to filter by: " << std::endl;
+    std::cin >> filtertype;
+    // we will now pass this into inorderTraversal to filter by the type - we will pass in 1 to filter by type
+    inorderTraversal(root, 1, filtertype, types);
+}
+
+// helper function to print 1 of every lesson type
+void AVLTree::printAllTypesHelper(EATNode* node, std::vector<std::string> &types) {
+    if (node == nullptr) {
+        return;
+    }
+    printAllTypesHelper(node->left, types);
+    int temp;
+    // Skip printing nodes with a key of 0
+    if (node->data.first != 0) {
+        for (int i = 0; i < node->data.second.first.size(); i++) {
+            // make sure that i is 2 and that the type is not already in the vector
+            if (i == 2 && std::find(types.begin(), types.end(), node->data.second.first[i]) == types.end()) {
+                types.push_back(node->data.second.first[i]);
+                temp++;
+                std::cout  << "1) Type: [" << YELLOW << node->data.second.first[i]<< RESET << "]" << std::endl;
+            }
+        }
+        // std::cout << std::endl;
+    }
+    printAllTypesHelper(node->right, types);
+}
+
+// print helper functions
+void AVLTree::printDueDate(EATNode* node, int i){
+    std::cout << RED << "Due Date: " << RESET << node->data.second.first[i] << " ";
+    return;
+}
+
+void AVLTree::printLessonType(EATNode* node, int i){
+    std::cout << RED << "Lesson Type: " << RESET << node->data.second.first[i] << " ";
+    return;
+}
+
+void AVLTree::printOpenable(EATNode* node, int i){
+    std::cout << RED << "Openable: " << RESET << node->data.second.first[i] << " ";
+    return;
+}
+
+void AVLTree::printTitle(EATNode* node, int i){
+    std::cout << RED << "Title: " << RESET << node->data.second.first[i] << " ";
+    return;
+}
+
+void AVLTree::printStatus(EATNode* node, int i){
+    std::cout << RED << "Status: " << RESET << node->data.second.first[i] << " ";
+    return;
+}
+
+void AVLTree::printUserScore(EATNode* node, int i){
+    std::cout << RED << "User Score: " << RESET << node->data.second.first[i] << " ";
+    return;
+}
+
+void AVLTree::printPotentialScore(EATNode* node, int i){
+    std::cout << RED << "Potential Score: " << RESET << node->data.second.first[i] << " ";
+    return;
+}
+
+// print in order help function
+void AVLTree::checkCol(EATNode* node, int i){
+        if (i == 1) {
+        printDueDate(node, i);
+    }
+    else if (i == 2) {
+        printLessonType(node, i);
+    }
+    else if (i == 3) {
+        printOpenable(node, i);
+    }
+    else if (i == 4) {
+        printTitle(node, i);
+    }
+    else if (i == 5) {
+        printStatus(node, i);
+    } 
+    else if (i == 6) {
+        printUserScore(node, i);
+    }
+    else if (i == 7) {
+        printPotentialScore(node, i);
+    }
+    return;
 }

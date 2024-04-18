@@ -188,7 +188,8 @@ int main(int argc, char* argv[]) {
     // We will ask the user to decide if they want to get the data for a specific course
     int user_input;
     std::string user_splaytree_str;
-    int repeat_search = 1; // 1 is keep searching, 0 is done searching, 2 is keep searching but clear the terminal, 0 is done searching and clear the terminal
+    int repeat_search = 1; 
+    std::string filter_data;
     do{
         // if repeat search is 2 and the system is not windows
         if (repeat_search == 2) {
@@ -226,8 +227,20 @@ int main(int argc, char* argv[]) {
             // print the binary heap
             bh->printBinaryHeap();
         } else if (user_ds_type == "avl") {
-            // print the AVL tree
-            avl->printAVLTree();
+            // we ask the user if they want to filter the data.
+            std::cout << "Would you like to filter the data? (y or n): ";
+            std::cin >> filter_data;
+            // we call a function to list options for filtering
+            if (filter_data == "y") {
+                avl->printFilters();
+
+            } 
+            // if the user does not want to filter the data
+            else{
+                // print the AVL tree - pass in 0 to indicate no filter
+                avl->printAVLTree();
+            }
+            
 
             std::cout << "Checking if the AVL tree is balanced..." << std::endl;
             // check if the AVL tree is balanced

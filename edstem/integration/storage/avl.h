@@ -23,13 +23,27 @@ class AVLTree{
     // getBalance: A function that returns the balance factor of a node
     int getBalance(EATNode* node);
     // inorderTraversal: A function that performs an inorder traversal of the AVL tree
-    void inorderTraversal(EATNode* node);
+    void inorderTraversal(EATNode* node, int filter, int specifier, std::vector<std::string> &types);
     // deleteAllNodes: A function that deletes all nodes in the AVL tree
     void deleteAllNodes(EATNode* node);
     // isBalanced: A function that checks if the AVL tree is balanced
     bool isBalanced(EATNode* node);
     // visualize helper function
     void visualizeHelper(EATNode* node, std::ofstream& file);
+
+    // print functions
+    void printAllTypesHelper(EATNode* node, std::vector<std::string> &types);
+
+    void printDueDate(EATNode* node, int i);
+    void printLessonType(EATNode* node, int i);
+    void printOpenable(EATNode* node, int i);
+    void printTitle(EATNode* node, int i);
+    void printStatus(EATNode* node, int i);
+    void printUserScore(EATNode* node, int i);
+    void printPotentialScore(EATNode* node, int i);
+
+    void checkCol(EATNode* node, int i);
+
     
 
     // Public Members
@@ -43,15 +57,23 @@ class AVLTree{
     EATNode* search(int key);
     // insert: A function that inserts a node with a given key and contents into the AVL tree
     void insert(EATNode* node);
+
+
     // printAVLTree: Prints the contents of the AVL tree in order
-    void printAVLTree();
-    // do remove later
+    // we will take in an int to determine if we are filtering by a specific thing
+    void printAVLTree(int filter);
 
     // isBalanced: A function that checks if the AVL tree is balanced
     bool isBalanced();
 
     // visualize: A function that visualizes the AVL tree
     void visualize();
+    
+    // printFilter
+    void printFilters();
+
+    // printAllTypes
+    void printAllTypes();
     
 
 };
