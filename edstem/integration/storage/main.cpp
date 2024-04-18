@@ -173,6 +173,7 @@ int main(int argc, char* argv[]) {
 
                             phrase.clear();
                         }
+                        
                     } 
                     // if we are not in quotes we add the character to the phrase
                     else if (in_quotes) {

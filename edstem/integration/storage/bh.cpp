@@ -82,7 +82,7 @@ void BinaryHeap::printBinaryHeap(int filter, int specifier, std::vector<std::str
             else if (filter == 2 && heap[i]->data.second.first[1] != "Unavailable") {
                 checkCol(i, j);
             }
-            else if (filter == 3 && (std::stoi(heap[i]->data.second.first[6]) == 0 || std::stoi(heap[i]->data.second.first[7]) == 0)) {
+            else if (filter == 3 && heap[i]->data.second.first.size() > 6) {
                 checkCol(i, j);
             }
             else if (filter == 4 && specifier == 1 && heap[i]->data.second.first[3] == "True") {
@@ -287,7 +287,7 @@ void BinaryHeap::printKeyFront(int i, int filter, int specifier, std::vector<std
     else if (filter == 2 && heap[i]->data.second.first[1] != "Unavailable") {
         std::cout << "Key: " << GREEN << heap[i]->data.first << RESET << " [";
     } 
-    else if (filter == 3 && (std::stoi(heap[i]->data.second.first[6]) != 0 || std::stoi(heap[i]->data.second.first[7]) == 0)) {
+    else if (filter == 3 && heap[i]->data.second.first.size() > 6) {
         std::cout << "Key: " << GREEN << heap[i]->data.first << RESET << " [";
     } 
     else if (filter == 4 && specifier == 1 && heap[i]->data.second.first[3] == "True") {
@@ -318,7 +318,7 @@ void BinaryHeap::printKeyBack(int i, int filter, int specifier, std::vector<std:
     else if (filter == 2 && heap[i]->data.second.first[1] != "Unavailable") {
         std::cout << "]" << std::endl << std::endl;
     } 
-    else if (filter == 3 && (std::stoi(heap[i]->data.second.first[6]) != 0 || std::stoi(heap[i]->data.second.first[7]) == 0)) {
+    else if (filter == 3 && heap[i]->data.second.first.size() > 6) {
         std::cout << "]" << std::endl << std::endl;
     } 
     else if (filter == 4 && specifier == 1 && heap[i]->data.second.first[3] == "True") {

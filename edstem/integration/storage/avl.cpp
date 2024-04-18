@@ -159,7 +159,7 @@ void AVLTree::inorderTraversal(EATNode* node, int filter, int specifier, std::ve
                 checkCol(node, i);
             }
             // if the filter is 3 and the user's current score is not equal to 0 or the potential score is not equal to 0
-            else if (filter == 3 && (std::stoi(node->data.second.first[6]) == 0 || std::stoi(node->data.second.first[7]) == 0)) { // filter by grade
+            else if (filter == 3 && node->data.second.first.size() > 6) {
                 checkCol(node, i);
             }
             // if the filter is 4 and the user specifies 1 or 2 we print out either true or false
@@ -219,8 +219,8 @@ void AVLTree::printAVLTree(int filter) {
     }
     // when the print tree is called and filter is 3 filter by grade
     else if (filter == 3) {
-        // tell them we are going to filter out grades that are 0 or unavailable
-        std::cout << "Filtering out grades with a user score of 0 or are unavailable" << std::endl;
+        // add more things in the future here
+        std::cout << "Filtering out ungraded assignments" << std::endl;
         inorderTraversal(root, 3, specifier, types);
         std::cout << std::endl;
     }
@@ -418,7 +418,7 @@ void AVLTree::printKeyFront(EATNode* node, int filter, int specifier, std::vecto
     else if (filter == 2 && node->data.second.first[1] != "Unavailable") {
         std::cout << "Key: " << GREEN << node->data.first << RESET << " [";
     } 
-    else if (filter == 3 && (std::stoi(node->data.second.first[6]) != 0 || std::stoi(node->data.second.first[7]) == 0)) {
+    else if (filter == 3 && node->data.second.first.size() > 6) {
         std::cout << "Key: " << GREEN << node->data.first << RESET << " [";
     } 
     else if (filter == 4 && specifier == 1 && node->data.second.first[3] == "True") {
@@ -449,7 +449,7 @@ void AVLTree::printKeyBack(EATNode* node, int filter, int specifier, std::vector
     else if (filter == 2 && node->data.second.first[1] != "Unavailable") {
         std::cout << "]" << std::endl << std::endl;
     } 
-    else if (filter == 3 && (std::stoi(node->data.second.first[6]) != 0 || std::stoi(node->data.second.first[7]) == 0)) {
+    else if (filter == 3 && node->data.second.first.size() > 6) {
         std::cout << "]" << std::endl << std::endl;
     } 
     else if (filter == 4 && specifier == 1 && node->data.second.first[3] == "True") {
