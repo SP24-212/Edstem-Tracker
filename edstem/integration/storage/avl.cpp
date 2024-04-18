@@ -202,7 +202,7 @@ void AVLTree::printAVLTree(int filter) {
 
     // when the print tree is called and filter is 0 just print tree like normal
     if (filter == 0) {
-        inorderTraversal(root, 1, specifier, types);
+        inorderTraversal(root, 0, specifier, types);
         std::cout << std::endl;
     }
     // when the print tree is called and filter is 1 filter by type
