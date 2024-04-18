@@ -22,3 +22,7 @@ edstem/integration/storage/store-data
 # images
 edstem/integration/edstem-data/avl.dot
 edstem/integration/edstem-data/avl.png
+
+
+# python script
+output
