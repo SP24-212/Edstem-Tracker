@@ -103,6 +103,16 @@ The new functions that were added include:
 
 >For more details visit [Edapiwl](https://github.com/trevmoy/edapiwl/blob/main/edapi/edapi.py)
 
+#### 4. Publishing the API
+
+In order to check if users have the required API along with other packages we had to publish the modified API so that it is easily downloadable for users.
+
+The API is listed on [PyPi](https://pypi.org/project/edapiwl/0.0.3/).
+
+It can also be downloaded by running:
+```
+pip install edapiwl==0.0.3
+```
 
 ### 3. Implementing Into Project
 
