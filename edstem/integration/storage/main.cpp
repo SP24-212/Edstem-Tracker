@@ -220,13 +220,31 @@ int main(int argc, char* argv[]) {
             int user_course_id;
             std::cout << "Please enter the course id you would like to view: ";
             std::cin >> user_course_id;
-
             // get the binary heap pointer from the splay tree
             BinaryHeap* bh = (BinaryHeap*)st->get_bh_pointer(user_course_id);
 
-            // print the binary heap
-            bh->printBinaryHeap();
-        } else if (user_ds_type == "avl") {
+            // we ask the user if they want to filter the data.
+            std::cout << "Would you like to filter the data? (y or n): ";
+            std::cin >> filter_data;
+            if (filter_data == "y") {
+                bh->printFilters();
+                int filter;
+                std::cout << "Please enter the number of the filter you would like to apply: ";
+                std::cin >> filter;
+                // to make sure the user enters a valid filter
+                while (filter < 0 || filter > 5) {
+                    std::cout << "Invalid filter. Please enter a number between 1 and 5: ";
+                    std::cin >> filter;
+                }
+                bh->filterBinaryHeap(filter);
+            } 
+            
+            else {
+                bh->filterBinaryHeap(0);
+            }
+        } 
+        
+        else if (user_ds_type == "avl") {
             // we ask the user if they want to filter the data.
             std::cout << "Would you like to filter the data? (y or n): ";
             std::cin >> filter_data;
@@ -244,11 +262,9 @@ int main(int argc, char* argv[]) {
                 avl->printAVLTree(filter);
             } 
             // if the user does not want to filter the data
-            else{
+            else {
                 avl->printAVLTree(0);
             }
-            
-
             std::cout << "Checking if the AVL tree is balanced..." << std::endl;
             // check if the AVL tree is balanced
             if (avl->isBalanced()) {

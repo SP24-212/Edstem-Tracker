@@ -159,7 +159,7 @@ void AVLTree::inorderTraversal(EATNode* node, int filter, int specifier, std::ve
                 checkCol(node, i);
             }
             // if the filter is 3 and the user's current score is not equal to 0 or the potential score is not equal to 0
-            else if (filter == 3 && (std::stoi(node->data.second.first[6]) != 0 || std::stoi(node->data.second.first[7]) == 0)) { // filter by grade
+            else if (filter == 3 && (std::stoi(node->data.second.first[6]) == 0 || std::stoi(node->data.second.first[7]) == 0)) { // filter by grade
                 checkCol(node, i);
             }
             // if the filter is 4 and the user specifies 1 or 2 we print out either true or false

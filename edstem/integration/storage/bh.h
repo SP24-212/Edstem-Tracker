@@ -21,6 +21,18 @@ class BinaryHeap {
     int heapSize;
     void resize(int newSize);
     void heapify(int index);
+    void printDueDate(int i, int j);
+    void printLessonType(int i, int j);
+    void printOpenable(int i, int j);
+    void printTitle(int i, int j);
+    void printStatus(int i, int j);
+    void printUserScore(int i, int j);
+    void printPotentialScore(int i, int j);
+    void printAllTypesHelper(std::vector<std::string> &types, int &count);
+    void printBinaryHeap(int filter, int specifier, std::vector<std::string> &types);
+    void printKeyFront(int i, int filter, int specifier, std::vector<std::string> &types);
+    void printKeyBack(int i, int filter, int specifier, std::vector<std::string> &types);
+
 
     public:
     /*
@@ -39,8 +51,12 @@ class BinaryHeap {
     void insert(EATNode* node);
     EATNode* find(int key);
     EATNode* extractMin();
-    void printBinaryHeap();
-    // Other 
+    void printBinaryHeap(int filter);
+    void printFilters();
+    void filterBinaryHeap(int filter);
+    void checkCol(int i, int j);
+    void printAllTypes();
+
 
 
 
