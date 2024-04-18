@@ -1,4 +1,4 @@
-from edapi import EdAPI
+from edapi import EdAPIWL
 from colorama import Fore
 from datetime import datetime
 import time
@@ -26,7 +26,7 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
         print()
 
 # initialize Ed API
-ed = EdAPI()
+ed = EdAPIWL()
 # authenticate user through the ED_API_TOKEN environment variable
 ed.login()
 

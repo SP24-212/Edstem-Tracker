@@ -243,7 +243,13 @@ int main(int argc, char* argv[]) {
             std::cin >> visualize_avl;
             if (visualize_avl == "y") {
                 std::cout << "Visualizing the AVL tree..." << std::endl;
-                avl->visualize();
+                // If the user has GraphViz installed on their system the AVL tree will be visualized
+                try {
+                    avl->visualize();
+                } catch (...) {
+                    std::cout << "There was an error visualizing the AVL tree." << std::endl;
+                    std::cout << "Please ensure you have GraphViz installed on your system." << std::endl;
+                }
             } else {
                 std::cout << "You have chosen not to visualize the AVL tree." << std::endl;
             }
