@@ -233,12 +233,19 @@ int main(int argc, char* argv[]) {
             // we call a function to list options for filtering
             if (filter_data == "y") {
                 avl->printFilters();
-
+                int filter;
+                std::cout << "Please enter the number of the filter you would like to apply: ";
+                std::cin >> filter;
+                // to make sure the user enters a valid filter
+                while (filter < 0 || filter > 5) {
+                    std::cout << "Invalid filter. Please enter a number between 1 and 5: ";
+                    std::cin >> filter;
+                }
+                avl->printAVLTree(filter);
             } 
             // if the user does not want to filter the data
             else{
-                // print the AVL tree - pass in 0 to indicate no filter
-                avl->printAVLTree();
+                avl->printAVLTree(0);
             }
             
 

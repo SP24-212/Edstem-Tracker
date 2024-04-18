@@ -32,7 +32,7 @@ class AVLTree{
     void visualizeHelper(EATNode* node, std::ofstream& file);
 
     // print functions
-    void printAllTypesHelper(EATNode* node, std::vector<std::string> &types);
+    void printAllTypesHelper(EATNode* node, std::vector<std::string> &types, int &count);
 
     void printDueDate(EATNode* node, int i);
     void printLessonType(EATNode* node, int i);
@@ -43,6 +43,9 @@ class AVLTree{
     void printPotentialScore(EATNode* node, int i);
 
     void checkCol(EATNode* node, int i);
+
+    void printKeyFront(EATNode* node, int filter, int specifier, std::vector<std::string> &types);
+    void printKeyBack(EATNode* node, int filter, int specifier, std::vector<std::string> &types);
 
     
 
