@@ -232,17 +232,20 @@ void BinaryHeap::printTitle(int i, int j){
 }
 
 void BinaryHeap::printStatus(int i, int j){
-    std::cout << RED << "Status: " << RESET << heap[i]->data.second.first[j] << " ";
+    // just to avoid possibly printing the user's score  if the status is a stoi we need to skip
+    if (heap[i]->data.second.first[j] == "unattempted" || heap[i]->data.second.first[j] == "attempted") {
+        std::cout << RED << "Status: " << RESET << heap[i]->data.second.first[j] << " ";
+    }
     return;
 }
 
 void BinaryHeap::printUserScore(int i, int j){
-    std::cout << RED << "User Score: " << RESET << heap[i]->data.second.first[j] << " ";
+    std::cout << RED << "User Score: " << RESET << heap[i]->data.second.first[heap[i]->data.second.first.size() -3]  << " ";
     return;
 }
 
 void BinaryHeap::printPotentialScore(int i, int j){
-    std::cout << RED << "Potential Score: " << RESET << heap[i]->data.second.first[j] << " ";
+    std::cout << RED << "Potential Score: " << RESET << heap[i]->data.second.first[heap[i]->data.second.first.size() -2]  << " ";
     return;
 }
 

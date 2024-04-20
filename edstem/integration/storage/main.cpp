@@ -3,19 +3,27 @@
 #include <sstream>
 #include <string>
 #include <cstdlib>
-#include "bh.h"
-#include "bh.cpp"
-#include "avl.h"
-#include "node.cpp"
-#include "st.cpp"
 #include "avl.cpp"
+#include "bh.cpp"
+#include "st.cpp"
+#include "node.cpp"
+#include "node.h"
+#include "avl.h"
+#include "st.h"
+#include "bh.h"
 
 void clearTerminal();
 
 int main(int argc, char* argv[]) {
 
-    std::ifstream file("edstem/integration/edstem-data/data.txt");
+    // Get the directory of the current executable
+    std::string executable_path(argv[0]);
+    std::string executable_dir = executable_path.substr(0, executable_path.find_last_of("\\/") + 1);
 
+    // Path to the data file in the package directory
+    std::string data_file_path = executable_dir + "edstem/integration/data.txt";
+
+    std::ifstream file(data_file_path);
     // Later we will implement the rest of the code hre
 
     std::string line;

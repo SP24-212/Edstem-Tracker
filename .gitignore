@@ -4,7 +4,7 @@
 edstem/tests/
 
 # edstem data file
-edstem/integration/edstem-data/data.txt
+edstem/integration/data.txt
 
 # cpp executables
 edstem/integration/storage/store-data
@@ -20,9 +20,21 @@ edstem/integration/storage/store-data
 
 
 # images
-edstem/integration/edstem-data/avl.dot
-edstem/integration/edstem-data/avl.png
+edstem/integration/avl.dot
+edstem/integration/avl.png
 
 
 # python script
 output
+
+# edstem_assignment_tracker.egg-info
+/edstem_assignment_tracker.egg-info
+
+# virtual environment
+/venv
+
+# dist
+/dist
+
+# manifest.in
+MANIFEST.in

@@ -272,7 +272,7 @@ bool AVLTree::isBalanced() {
 
 // Visualize the AVL tree
 void AVLTree::visualize() {
-    std::string folderPath = "edstem/integration/edstem-data/";
+    std::string folderPath = "edstem/integration/";
 
     std::ofstream file;
     file.open(folderPath + "avl.dot");
@@ -368,8 +368,13 @@ void AVLTree::printTitle(EATNode* node, int i){
     return;
 }
 
-void AVLTree::printStatus(EATNode* node, int i){
-    std::cout << RED << "Status: " << RESET << node->data.second.first[i] << " ";
+void AVLTree::printStatus(EATNode* node, int i) {
+    if (node->data.second.first[i] == "attempted") {
+        std::cout << RED << "Status: " << RESET << node->data.second.first[i] << " ";
+    } 
+    else if (node->data.second.first[i] == "unattempted") {
+        std::cout << RED << "Status: " << RESET << node->data.second.first[i] << " ";
+    }
     return;
 }
 
