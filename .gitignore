@@ -4,10 +4,10 @@
 edstem/tests/
 
 # edstem data file
-edstem/integration/data.txt
+edstem/integration/storage/data.txt
 
 # cpp executables
-edstem/integration/storage/store-data
+edstem/integration/storage/prog
 
 # .VSCode
 .vscode/

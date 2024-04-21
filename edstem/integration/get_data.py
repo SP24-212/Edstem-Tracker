@@ -52,7 +52,7 @@ l = len(items)
 courses_with_lessons = []
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-data_file_path = os.path.join(script_dir, "data.txt")
+data_file_path = os.path.join(script_dir, "storage/data.txt")
 
 
 

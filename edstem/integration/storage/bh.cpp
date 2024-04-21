@@ -71,7 +71,7 @@ void BinaryHeap::printBinaryHeap(int filter, int specifier, std::vector<std::str
     for (int i = 1; i < heapSize; i++) {
         printKeyFront(i, filter, specifier, types);
         // Iterate over both column names and elements in the column
-        for (size_t j = 1; j < heap[i]->data.second.first.size() - 1; j++) {
+        for (int j = 1; j < heap[i]->data.second.first.size() - 1; j++) {
             
             if (filter == 0) {    
                 checkCol(i, j);

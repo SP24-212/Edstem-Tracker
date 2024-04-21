@@ -3,10 +3,6 @@
 #include <sstream>
 #include <string>
 #include <cstdlib>
-#include "avl.cpp"
-#include "bh.cpp"
-#include "st.cpp"
-#include "node.cpp"
 #include "node.h"
 #include "avl.h"
 #include "st.h"
@@ -16,12 +12,10 @@ void clearTerminal();
 
 int main(int argc, char* argv[]) {
 
-    // Get the directory of the current executable
-    std::string executable_path(argv[0]);
-    std::string executable_dir = executable_path.substr(0, executable_path.find_last_of("\\/") + 1);
 
-    // Path to the data file in the package directory
-    std::string data_file_path = executable_dir + "edstem/integration/data.txt";
+   // get the data file path as an argument
+    std::string data_file_path = argv[1];
+
 
     std::ifstream file(data_file_path);
     // Later we will implement the rest of the code hre
@@ -36,8 +30,6 @@ int main(int argc, char* argv[]) {
     // create course key for splay tree
     int st_course_key;
     int bhavl_lesson_key;
-    int test_count;
-    int courseId;
 
     // Declare the data structures
     SplayTree* st = new SplayTree();
@@ -146,7 +138,7 @@ int main(int argc, char* argv[]) {
             if (line.substr(0, 15) == "bhavl_lesson_id") {
 
                 int idStartIndex = 18;
-                int idLength = line.length() - idStartIndex - 1; // Adjusting to remove the trailing quote
+                int idLength = (int)line.length() - idStartIndex - 1; // Adjusting to remove the trailing quote
                 /* 
                     if vector is empty
                     create a new node
@@ -195,7 +187,6 @@ int main(int argc, char* argv[]) {
 
 
     // We will ask the user to decide if they want to get the data for a specific course
-    int user_input;
     std::string user_splaytree_str;
     int repeat_search = 1; 
     std::string filter_data;

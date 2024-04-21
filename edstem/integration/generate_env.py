@@ -1,23 +1,25 @@
 import os
 
-def create_env_file(token):
+def create_env(token):
     # Get the directory of the current script
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Path to the parent directory
-    parent_dir = os.path.dirname(script_dir)
+    # parent_dir = os.path.dirname(script_dir)
 
     # Path to the .env file
-    env_file_path = os.path.join(parent_dir, ".env")
+    # env_file_path = os.path.join(parent_dir, ".env")
 
     # Define the content of the .env file
-    env_content = f"ED_API_TOKEN={token}\n"
-
+    # env_content = f"ED_API_TOKEN={token}\n"
+    os.environ["ED_API_TOKEN"] = f"{token}"
+    print(os.environ)
+    
     # Write the content to the .env file
-    with open(env_file_path, "w") as env_file:
-        env_file.write(env_content)
+    # with open(env_file_path, "w") as env_file:
+    #     env_file.write(env_content)
 
-    print(f".env file created with token: {token} at {env_file_path}")
+    print(f"Created token: {token}")
 
 def main():
     link = "https://edstem.org/us/settings/api-tokens"
@@ -28,10 +30,14 @@ def main():
     print("3. Click on 'Create Token'\n")
     print("4. Copy the token and paste it below\n")
     # Get the token from user input
-    token = input("Enter your token: ")
 
     # Create the .env file with the token
-    create_env_file(token)
+    # create_env(token)
+    print("On Mac/Linux, run the following command:")
+    print("export ED_API_TOKEN=your_token\n")
+    print("On Windows, run the following command:")
+    print("set ED_API_TOKEN=your_token\n")
+
 
 if __name__ == "__main__":
     main()

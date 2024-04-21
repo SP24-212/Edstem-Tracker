@@ -1,27 +1,27 @@
 from setuptools import setup, Extension
 
 # Define the extension module for the C++ code
-cpp_extension = Extension('edstem.integration.storage', 
-                        sources=['edstem/integration/storage/main.cpp'],
-                        include_dirs=['edstem/integration/storage/'],
-                        language='c++',
-                        extra_compile_args=['-std=c++11']
-                          )
+# cpp_extension = Extension('_edstem.integration.storage', 
+#                         sources=['edstem/integration/storage/main.cpp'],
+#                         include_dirs=['edstem/integration/storage/'],
+#                         language='c++'
+#                           )
 
 setup(
     name='edstem-assignment-tracker',
-    version='1.0.31',
+    version='1.0.44',
     description='Edstem Assignment Tracker.',
     long_description='Edstem Assignment Tracker is a python package that allows you to easily track your assignments for the Edstem platform.',
     author='Trevor Moy',
     author_email='trevormoy14@uri.edu',
     url='https://github.com/SP24-212/Edstem-Tracker',
-    packages=['edstem.integration'],
+    packages=['edstem.integration',
+              'edstem.integration.storage'],
     package_data={'edstem.integration': ['*.txt'],
                   'edstem.integration.storage': ['*.h']},
     include_package_data=True,
-    ext_modules=[cpp_extension],  # Include the C++ extension module
-    # scripts=['edstem/integration/storage/output'],  # Python scripts
+    # ext_modules=[cpp_extension],  # Include the C++ extension module
+    scripts=['edstem/integration/storage/compile.py'],  # Python scripts
     install_requires=['edapiwl==0.0.3',
                        'colorama'],  # Python dependencies
     classifiers=[
