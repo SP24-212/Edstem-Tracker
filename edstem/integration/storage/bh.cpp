@@ -170,3 +170,36 @@
     bool BinaryHeap::isBalanced() {
         return isBalanced(heap[0]);
     }
+
+    // Function to visualize the binary heap
+    void BinaryHeap::visualize() {
+    std::string folderPath = "edstem/integration/edstem-data/";
+
+    std::ofstream file;
+    file.open(folderPath + "binary_heap.dot");
+    file << "digraph BinaryHeap {" << std::endl;
+    visualizeHelper(heap[0], file, 0);
+    file << "}" << std::endl;
+    file.close();
+    system(("dot -Tpng " + folderPath + "binary_heap.dot -o " + folderPath + "binary_heap.png").c_str());
+    system(("open " + folderPath + "binary_heap.png").c_str());
+    }
+
+    // Helper function to visualize the binary heap recursively
+    void BinaryHeap::visualizeHelper(EATNode* node, std::ofstream& file, int index) {
+    if (node == nullptr) {
+        return;
+    }
+    // Create the node label with its key
+    file << "node_" << index << " [label=\"" << node->data.first << "\"];" << std::endl;
+    if (node->left != nullptr) {
+        // Connect the node to its left child with an edge labeled "left"
+        file << "node_" << index << " -> node_" << 2 * index + 1 << " [label=\"left\"];" << std::endl;
+        visualizeHelper(node->left, file, 2 * index + 1);
+    }
+    if (node->right != nullptr) {
+        // Connect the node to its right child with an edge labeled "right"
+        file << "node_" << index << " -> node_" << 2 * index + 2 << " [label=\"right\"];" << std::endl;
+        visualizeHelper(node->right, file, 2 * index + 2);
+    }
+    }

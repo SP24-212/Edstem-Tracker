@@ -1,4 +1,5 @@
 #include "st.h"
+#include <fstream>
 
 #define RESET   "\033[0m"
 #define GREEN   "\033[32m"
@@ -213,27 +214,31 @@ void* SplayTree::get_bh_pointer(int key) {
     return nullptr;
 }
 
-// Function to get the height of a node
-int SplayTree::getHeight(EATNode* node) {
-  if (node == nullptr) {
-    return 0;
-  }
-  return 1 + std::max(getHeight(node->left), getHeight(node->right));
+void SplayTree::visualize() {
+  std::string folderPath = "edstem/integration/edstem-data/";
+
+  std::ofstream file;
+  file.open(folderPath + "splay.dot");
+  file << "digraph SplayTree {" << std::endl;
+  visualizeHelper(root, file);
+  file << "}" << std::endl;
+  file.close();
+  system(("dot -Tpng " + folderPath + "splay.dot -o " + folderPath + "splay.png").c_str());
+  system(("open " + folderPath + "splay.png").c_str());
 }
 
-// Function to check if a node is balanced
-bool SplayTree::isBalanced(EATNode* node) {
-  if (node == nullptr) {
-    return true; // Empty tree is considered balanced
+// Helper function to visualize the splay tree
+void SplayTree::visualizeHelper(EATNode* node, std::ofstream& file) {
+  if (node == nullptr || node->data.first == 0) {
+    return;
   }
-  int leftHeight = getHeight(node->left);
-  int rightHeight = getHeight(node->right);
-  return abs(leftHeight - rightHeight) <= 1 && 
-         isBalanced(node->left) && isBalanced(node->right); // Check subtrees recursively
-}
-
-// Function to check if the Splay Tree is balanced
-bool SplayTree::isBalanced() {
-  return isBalanced(root);
+  if (node->left != nullptr && node->left->data.first != 0) {
+    file << node->data.first << " -> " << node->left->data.first << ";" << std::endl;
+  }
+  if (node->right != nullptr && node->right->data.first != 0) {
+    file << node->data.first << " -> " << node->right->data.first << ";" << std::endl;
+  }
+  visualizeHelper(node->left, file);
+  visualizeHelper(node->right, file);
 }
 

@@ -26,6 +26,7 @@ class BinaryHeap {
     int getBalance(EATNode* node);
     bool isBalanced(EATNode* node);
     bool hasTwoChildren(EATNode* node);
+    void visualizeHelper(EATNode* node, std::ofstream& file, int index);
 
     public:
     /*
@@ -47,6 +48,8 @@ class BinaryHeap {
 
     void printBinaryHeap();
     bool isBalanced();
+
+    void visualize();
     
     // Other 
 

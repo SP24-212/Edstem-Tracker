@@ -25,10 +25,8 @@ class SplayTree{
     void deleteSplayTree(EATNode* node);
     void inorderTraversal(EATNode* node);
     EATNode* searchRecursive(EATNode* node, int key);
-
-    int getHeight(EATNode* node);
-    bool isBalanced(EATNode* node);
-
+    void visualizeHelper(EATNode* node, std::ofstream& file);
+    
     public:
     /*
     Public Members
@@ -48,9 +46,7 @@ class SplayTree{
     void printSplayTree();
     void add_bh_pointer(int key, void* ptr);
     void* get_bh_pointer(int key);
-    
-    bool isBalanced();
-
+    void visualize();
 };
 
 #endif // ST_H
