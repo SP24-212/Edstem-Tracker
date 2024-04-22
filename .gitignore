@@ -7,7 +7,7 @@ edstem/tests/
 edstem/integration/storage/data.txt
 
 # cpp executables
-edstem/integration/storage/prog
+edstem/integration/storage/store-data
 
 # .VSCode
 .vscode/
@@ -17,7 +17,6 @@ edstem/integration/storage/prog
 
 # .DS_Store
 .DS_Store
-
 
 # images
 edstem/integration/avl.dot
