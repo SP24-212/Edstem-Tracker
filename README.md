@@ -31,11 +31,11 @@ To begin using the Edstem Assignment Tracker you first need to install the packa
 
 2. After the installation is complete the next step is to run `generate-env`. This command will prompt you with the instructions to create an environment token for the 2nd command.
 
-![gen-env](docs/gifs/gen-env-demo.gif)
+![gen-env gif](docs/gifs/gen-env-demo.gif)
 
 3. Once you have created your environment token you can now run `ed-tracker`. Running this command will compile the script which collects the data, stores it, and gives the user 5 filtering options for their lesson data.
 
-![ed-tracker](docs/gifs/ed-tracker-demo.gif)
+![ed-tracker gif](docs/gifs/ed-tracker-demo.gif)
 
 ### Additional Information
 
