@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='edstem-assignment-tracker',
-    version='1.0.45',
+    version='1.0.46',
     description='Edstem Assignment Tracker.',
     long_description='Edstem Assignment Tracker is a python package that allows you to easily track your assignments for the Edstem platform.',
     author='Trevor Moy',

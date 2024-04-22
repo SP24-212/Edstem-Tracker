@@ -38,7 +38,7 @@ void BinaryHeap::heapify(int index) {
 }
 
 void BinaryHeap::insert(EATNode* node) {
-    if (heapSize == heap.size()) {
+    if (heapSize == (int)heap.size()) {
         resize(heapSize + 1);
     }
     int i = heapSize++;
