@@ -270,34 +270,34 @@ bool AVLTree::isBalanced() {
     return isBalanced(root);
 }
 
-// Visualize the AVL tree
-void AVLTree::visualize() {
-    std::string folderPath = "edstem/integration/";
+// // Visualize the AVL tree
+// void AVLTree::visualize() {
+//     std::string folderPath = "edstem/integration/";
 
-    std::ofstream file;
-    file.open(folderPath + "avl.dot");
-    file << "digraph AVL {" << std::endl;
-    visualizeHelper(root, file);
-    file << "}" << std::endl;
-    file.close();
-    system(("dot -Tpng " + folderPath + "avl.dot -o " + folderPath + "avl.png").c_str());
-    system(("open " + folderPath + "avl.png").c_str());
-}
+//     std::ofstream file;
+//     file.open(folderPath + "avl.dot");
+//     file << "digraph AVL {" << std::endl;
+//     visualizeHelper(root, file);
+//     file << "}" << std::endl;
+//     file.close();
+//     system(("dot -Tpng " + folderPath + "avl.dot -o " + folderPath + "avl.png").c_str());
+//     system(("open " + folderPath + "avl.png").c_str());
+// }
 
-// Helper function to visualize the AVL tree
-void AVLTree::visualizeHelper(EATNode* node, std::ofstream& file) {
-    if (node == nullptr || node->data.first == 0) {
-        return;
-    }
-    if (node->left != nullptr && node->left->data.first != 0) {
-        file << node->data.first << " -> " << node->left->data.first << ";" << std::endl;
-    }
-    if (node->right != nullptr && node->right->data.first != 0) {
-        file << node->data.first << " -> " << node->right->data.first << ";" << std::endl;
-    }
-    visualizeHelper(node->left, file);
-    visualizeHelper(node->right, file);
-}
+// // Helper function to visualize the AVL tree
+// void AVLTree::visualizeHelper(EATNode* node, std::ofstream& file) {
+//     if (node == nullptr || node->data.first == 0) {
+//         return;
+//     }
+//     if (node->left != nullptr && node->left->data.first != 0) {
+//         file << node->data.first << " -> " << node->left->data.first << ";" << std::endl;
+//     }
+//     if (node->right != nullptr && node->right->data.first != 0) {
+//         file << node->data.first << " -> " << node->right->data.first << ";" << std::endl;
+//     }
+//     visualizeHelper(node->left, file);
+//     visualizeHelper(node->right, file);
+// }
 
 // Function to return the available filters for users
 void AVLTree::printFilters() {
