@@ -29,7 +29,7 @@ class AVLTree{
     // isBalanced: A function that checks if the AVL tree is balanced
     bool isBalanced(EATNode* node);
     // visualize helper function
-    void visualizeHelper(EATNode* node, std::ofstream& file);
+    // void visualizeHelper(EATNode* node, std::ofstream& file);
 
     // print functions
     void printAllTypesHelper(EATNode* node, std::vector<std::string> &types, int &count);
@@ -70,7 +70,7 @@ class AVLTree{
     bool isBalanced();
 
     // visualize: A function that visualizes the AVL tree
-    void visualize();
+    // void visualize();
     
     // printFilter
     void printFilters();
