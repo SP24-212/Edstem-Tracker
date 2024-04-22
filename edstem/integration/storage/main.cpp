@@ -16,7 +16,6 @@ int main(int argc, char* argv[]) {
    // get the data file path as an argument
     std::string data_file_path = argv[1];
 
-
     std::ifstream file(data_file_path);
     // Later we will implement the rest of the code hre
 
@@ -197,7 +196,7 @@ int main(int argc, char* argv[]) {
         }
 
         // ask if they want to see the splay tree to view the course ids
-        std::cout << "Would you like to see the splay tree to view the course ids? (y or n): ";
+        std::cout << "Would you like to see the splay tree to view the course ids? (" << GREEN << "y" <<  RESET" or " << RED << "n" << RESET <<"): ";
         std::cin >> user_splaytree_str;
 
         if (user_splaytree_str == "y") {
@@ -220,11 +219,23 @@ int main(int argc, char* argv[]) {
             int user_course_id;
             std::cout << "Please enter the course id you would like to view: ";
             std::cin >> user_course_id;
+            // check if the course is true
+            for (int i = 0; i < course_ids.size(); i++) {
+                if (course_ids[i] == user_course_id) {
+                    break;
+                }
+                if (i == course_ids.size() - 1) {
+                    std::cout << "The course id you entered is not valid.\n" << std::endl;
+                    std::cout << "Please enter the course id you would like to view: ";
+                    std::cin >> user_course_id;
+                }
+            }
+
             // get the binary heap pointer from the splay tree
             BinaryHeap* bh = (BinaryHeap*)st->get_bh_pointer(user_course_id);
 
             // we ask the user if they want to filter the data.
-            std::cout << "Would you like to filter the data? (y or n): ";
+            std::cout << "Would you like to filter the data? (" << GREEN << "y" <<  RESET" or " << RED << "n" << RESET <<"): ";
             std::cin >> filter_data;
             if (filter_data == "y") {
                 bh->printFilters();
@@ -246,8 +257,12 @@ int main(int argc, char* argv[]) {
         
         else if (user_ds_type == "avl") {
             // we ask the user if they want to filter the data.
-            std::cout << "Would you like to filter the data? (y or n): ";
+            std::cout << "Would you like to filter the data? (" << GREEN << "y" <<  RESET" or " << RED << "n" << RESET <<"): ";
             std::cin >> filter_data;
+            while (filter_data != "y" && filter_data != "n") {
+                std::cout << "Invalid input. Try again. (" << GREEN << "y" <<  RESET" or " << RED << "n" << RESET <<"): ";
+                std::cin >> filter_data;
+            }
             // we call a function to list options for filtering
             if (filter_data == "y") {
                 avl->printFilters();
@@ -273,22 +288,23 @@ int main(int argc, char* argv[]) {
                 std::cout << "The AVL tree is not balanced." << std::endl;
             }
 
+            // Implement this sometime in the future.
             // Ask the user if they would like to visualize the AVL tree
-            std::string visualize_avl;
-            std::cout << "Would you like to visualize the AVL tree? (y or n): ";
-            std::cin >> visualize_avl;
-            if (visualize_avl == "y") {
-                std::cout << "Visualizing the AVL tree..." << std::endl;
-                // If the user has GraphViz installed on their system the AVL tree will be visualized
-                try {
-                    avl->visualize();
-                } catch (...) {
-                    std::cout << "There was an error visualizing the AVL tree." << std::endl;
-                    std::cout << "Please ensure you have GraphViz installed on your system." << std::endl;
-                }
-            } else {
-                std::cout << "You have chosen not to visualize the AVL tree." << std::endl;
-            }
+            // std::string visualize_avl;
+            // std::cout << "Would you like to visualize the AVL tree? (" << GREEN << "y" <<  RESET" or " << RED << "n" << RESET <<"): ";
+            // std::cin >> visualize_avl;
+            // if (visualize_avl == "y") {
+            //     std::cout << "Visualizing the AVL tree..." << std::endl;
+            //     // If the user has GraphViz installed on their system the AVL tree will be visualized
+            //     try {
+            //         avl->visualize();
+            //     } catch (...) {
+            //         std::cout << "There was an error visualizing the AVL tree." << std::endl;
+            //         std::cout << "Please ensure you have GraphViz installed on your system." << std::endl;
+            //     }
+            // } else {
+            //     std::cout << "You have chosen not to visualize the AVL tree." << std::endl;
+            // }
             
         } else {
             std::cout << "" << std::endl;
@@ -318,13 +334,10 @@ int main(int argc, char* argv[]) {
 
 
 // function to clear terminal
-void clearTerminal(){
-        // If the system is unix/linux/mac
-    try{
-        system("clear");
-    } 
-    // If the system is windows run cls
-    catch (...) {
-        system("cls");
-    }
+void clearTerminal() {
+    #ifdef _WIN32
+        std::system("cls");
+    #else
+        std::system("clear");
+    #endif
 }

@@ -25,7 +25,7 @@ def main():
     link = "https://edstem.org/us/settings/api-tokens"
     # provide user instructions
     print("To get the token, follow these steps:")
-    print(f"1. Go to {link}\n")
+    print(f"1. Go to \033[94m{link}\033[0m\n")
     print("2. Sign in if needed\n")
     print("3. Click on 'Create Token'\n")
     print("4. Copy the token and paste it below\n")
@@ -34,9 +34,9 @@ def main():
     # Create the .env file with the token
     # create_env(token)
     print("On Mac/Linux, run the following command:")
-    print("export ED_API_TOKEN=your_token\n")
+    print("\033[93mexport ED_API_TOKEN=your_token\033[0m\n")
     print("On Windows, run the following command:")
-    print("set ED_API_TOKEN=your_token\n")
+    print("\033[93mset ED_API_TOKEN=your_token\033[0m\n")
 
 
 if __name__ == "__main__":
