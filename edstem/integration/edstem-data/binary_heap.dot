@@ -1,4 +1,10 @@
 digraph BinaryHeap {
-node_0 -> node_1 [label="\left"];
-node_0 -> node_2 [label="\right"];
+node_0 -> node_1 [label="Title: 
+Due Date: 
+"];
+
+node_0 -> node_2 [label="Title: 
+Due Date: 
+"];
+
 }

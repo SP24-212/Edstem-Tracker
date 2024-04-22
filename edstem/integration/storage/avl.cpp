@@ -216,7 +216,6 @@ void AVLTree::deleteAllNodes(EATNode* node) {
     delete node;
 }
 
-
 // Balance check function
 bool AVLTree::isBalanced(EATNode* node) {
     if (node == nullptr) {

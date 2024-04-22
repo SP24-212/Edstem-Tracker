@@ -19,18 +19,17 @@ class SplayTree{
 
     EATNode* root;
     void splay(EATNode* node);
-    EATNode* findNode(int key);
     void rotateRight(EATNode* node);
     void rotateLeft(EATNode* node);
     void deleteSplayTree(EATNode* node);
     void inorderTraversal(EATNode* node);
     EATNode* searchRecursive(EATNode* node, int key);
     void visualizeHelper(EATNode* node, std::ofstream& file);
-
     bool isBalanced(EATNode* node);
     int getHeight(EATNode* node);
     
     public:
+    
     /*
     Public Members
     Constructor: Initializes the root of the splay tree to nullptr
@@ -44,13 +43,11 @@ class SplayTree{
     SplayTree();
     ~SplayTree();
     void insert(EATNode* node);
-    void remove(int key);
     EATNode* search(int key);
     void printSplayTree();
     void add_bh_pointer(int key, void* ptr);
     void* get_bh_pointer(int key);
     void visualize();
-
     bool isBalanced();
 };
 

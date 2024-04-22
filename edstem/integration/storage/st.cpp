@@ -55,12 +55,6 @@ void SplayTree::splay(EATNode* node) {
     root = node;
 }
 
-// Find node function
-EATNode* SplayTree::findNode(int key) {
-    // Implement findNode function
-    return nullptr;
-}
-
 // Rotate right function
 void SplayTree::rotateRight(EATNode* node) {
     // Make sure node and its left child are not nullptr
@@ -138,11 +132,6 @@ void SplayTree::insert(EATNode* node) {
     }
     node->parent = parent;
     splay(node);
-}
-
-// Remove function
-void SplayTree::remove(int key) {
-    // Implement remove function
 }
 
 // Search function

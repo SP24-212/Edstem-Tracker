@@ -187,8 +187,6 @@ system(("open " + folderPath + "binary_heap.png").c_str());
 
 // Helper function to visualize the binary heap recursively
 void BinaryHeap::visualizeHelper(EATNode* node, std::ofstream& file, int index) {
-
-
   if (node != nullptr) { // Only proceed if the node is not null
     int left = 2 * index + 1;
     int right = 2 * index + 2;
@@ -196,18 +194,29 @@ void BinaryHeap::visualizeHelper(EATNode* node, std::ofstream& file, int index) 
     // Create edges for left and right children (even if null)
     file << "node_" << index << " -> ";
     if (left < heapSize) {
-      file << "node_" << left;
+      // Create a temporary string to represent lesson information
+      std::string lessonInfo = "Title: " + node->data.second.first[4] + "\n";  // Assuming title is at index 4
+      lessonInfo += "Due Date: " + node->data.second.first[1] + "\n";  // Assuming due date is at index 1
+
+      file << "node_" << left << " [label=\"" << lessonInfo << "\"];" << std::endl;
     } else {
       file << "null";  // Indicate empty child
     }
-    file << " [label=\"\\left\"];" << std::endl;  // Escape "left" with backslash
+    file << std::endl;
 
     file << "node_" << index << " -> ";
     if (right < heapSize) {
-      file << "node_" << right;
+      // Create a temporary string to represent lesson information
+      std::string lessonInfo = "Title: " + node->data.second.first[4] + "\n";  // Assuming title is at index 4
+      lessonInfo += "Due Date: " + node->data.second.first[1] + "\n";  // Assuming due date is at index 1
+
+      file << "node_" << right << " [label=\"" << lessonInfo << "\"];" << std::endl;
     } else {
       file << "null";  // Indicate empty child
     }
-    file << " [label=\"\\right\"];" << std::endl; // Escape "right" with backslash
+    file << std::endl;
+
+    visualizeHelper(node->left, file, left);
+    visualizeHelper(node->right, file, right);
   }
 }
