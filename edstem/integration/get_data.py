@@ -1,7 +1,7 @@
 from edapi import EdAPIWL
 from colorama import Fore
 from datetime import datetime
-import time
+import os
 
 # Print iterations progress
 def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=50, fill='█', printEnd='\r'):
@@ -19,7 +19,7 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
     """
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
+    bar = "\033[92m" + fill * filledLength + "\033[0m" + '-' * (length - filledLength)
     print(f'\r{prefix} |{bar}| {percent}% {suffix}', end=printEnd)
     # Print New Line on Complete
     if iteration == total:
@@ -48,14 +48,16 @@ items = list(range(0, 57))
 l = len(items)
 
 
-# implement color later
-
 # holds the course id
 courses_with_lessons = []
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+data_file_path = os.path.join(script_dir, "storage/data.txt")
+
+
 
 # we will print the title and challenge id of all lessons with type cpp
-with open("edstem/integration/edstem-data/data.txt", "w") as f:
+with open(data_file_path, "w") as f:
 
   # we need to put the course data in then the lesson data
   # iterate through courses

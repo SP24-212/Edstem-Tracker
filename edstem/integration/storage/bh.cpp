@@ -71,7 +71,7 @@ void BinaryHeap::printBinaryHeap(int filter, int specifier, std::vector<std::str
     for (int i = 1; i < heapSize; i++) {
         printKeyFront(i, filter, specifier, types);
         // Iterate over both column names and elements in the column
-        for (size_t j = 1; j < heap[i]->data.second.first.size() - 1; j++) {
+        for (int j = 1; j < (int)heap[i]->data.second.first.size() - 1; j++) {
             
             if (filter == 0) {    
                 checkCol(i, j);
@@ -232,17 +232,20 @@ void BinaryHeap::printTitle(int i, int j){
 }
 
 void BinaryHeap::printStatus(int i, int j){
-    std::cout << RED << "Status: " << RESET << heap[i]->data.second.first[j] << " ";
+    // just to avoid possibly printing the user's score  if the status is a stoi we need to skip
+    if (heap[i]->data.second.first[j] == "unattempted" || heap[i]->data.second.first[j] == "attempted") {
+        std::cout << RED << "Status: " << RESET << heap[i]->data.second.first[j] << " ";
+    }
     return;
 }
 
 void BinaryHeap::printUserScore(int i, int j){
-    std::cout << RED << "User Score: " << RESET << heap[i]->data.second.first[j] << " ";
+    std::cout << RED << "User Score: " << RESET << heap[i]->data.second.first[heap[i]->data.second.first.size() -3]  << " ";
     return;
 }
 
 void BinaryHeap::printPotentialScore(int i, int j){
-    std::cout << RED << "Potential Score: " << RESET << heap[i]->data.second.first[j] << " ";
+    std::cout << RED << "Potential Score: " << RESET << heap[i]->data.second.first[heap[i]->data.second.first.size() -2]  << " ";
     return;
 }
 
@@ -266,7 +269,7 @@ void BinaryHeap::printAllTypes() {
 void BinaryHeap::printAllTypesHelper(std::vector<std::string> &types, int &count) {
     for (int i = 1; i < heapSize; i++) {
         if (heap[i]->data.first != 0) {
-            for (int j = 0; j < heap[i]->data.second.first.size(); j++) {
+            for (int j = 0; j < (int)heap[i]->data.second.first.size(); j++) {
                 // make sure that j is 2 and that the type is not already in the vector
                 if (j == 2 && std::find(types.begin(), types.end(), heap[i]->data.second.first[j]) == types.end()) {
                     types.push_back(heap[i]->data.second.first[j]);

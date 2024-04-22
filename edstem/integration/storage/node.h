@@ -7,6 +7,7 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include <algorithm>
 
 
 #define RESET   "\033[0m"
