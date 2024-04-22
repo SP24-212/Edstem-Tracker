@@ -27,7 +27,7 @@ For this project we use three data structures:
 To begin using the Edstem Assignment Tracker you first need to install the package using `pip`.
 
 1. If you have `pip` installed then you can run `pip install edstem-assignment-tracker`
->**Windows users**, If you experience errors during the installation process make sure that your terminal is compiling with g++.
+>**Windows users**, If you experience errors during the installation process make sure that your terminal is compiling with GCC.
 
 2. After the installation is complete the next step is to run `generate-env`. This command will prompt you with the instructions to create an environment token for the 2nd command.
 
