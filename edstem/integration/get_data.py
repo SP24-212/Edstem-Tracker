@@ -1,9 +1,9 @@
-from edapi import EdAPI
+from edapi import EdAPIWL
 from colorama import Fore
 from datetime import datetime
 
 # initialize Ed API
-ed = EdAPI()
+ed = EdAPIWL()
 # authenticate user through the ED_API_TOKEN environment variable
 ed.login()
 
