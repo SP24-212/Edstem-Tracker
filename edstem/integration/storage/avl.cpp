@@ -145,7 +145,7 @@ void AVLTree::inorderTraversal(EATNode* node, int filter, int specifier, std::ve
     // Skip printing nodes with a key of 0
     if (node->data.first != 0) {
         printKeyFront(node, filter, specifier, types);
-        for (int i = 0; i < node->data.second.first.size(); i++) {
+        for (int i = 0; i < (int)node->data.second.first.size(); i++) {
             // Filter out the data based on the filter
             if (filter == 0) { // no filter
                 checkCol(node, i);
@@ -334,7 +334,7 @@ void AVLTree::printAllTypesHelper(EATNode* node, std::vector<std::string> &types
     printAllTypesHelper(node->left, types, count);
     // Skip printing nodes with a key of 0
     if (node->data.first != 0) {
-        for (int i = 0; i < node->data.second.first.size(); i++) {
+        for (int i = 0; i < (int)node->data.second.first.size(); i++) {
             // make sure that i is 2 and that the type is not already in the vector
             if (i == 2 && std::find(types.begin(), types.end(), node->data.second.first[i]) == types.end()) {
                 types.push_back(node->data.second.first[i]);
