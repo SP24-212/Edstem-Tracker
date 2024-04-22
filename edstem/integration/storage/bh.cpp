@@ -187,7 +187,7 @@ system(("open " + folderPath + "binary_heap.png").c_str());
 
 // Helper function to visualize the binary heap recursively
 void BinaryHeap::visualizeHelper(EATNode* node, std::ofstream& file, int index) {
-  // ... (rest of the code remains the same) ...
+
 
   if (node != nullptr) { // Only proceed if the node is not null
     int left = 2 * index + 1;
@@ -210,6 +210,4 @@ void BinaryHeap::visualizeHelper(EATNode* node, std::ofstream& file, int index) 
     }
     file << " [label=\"\\right\"];" << std::endl; // Escape "right" with backslash
   }
-
-  // ... (rest of the code remains the same) ...
 }

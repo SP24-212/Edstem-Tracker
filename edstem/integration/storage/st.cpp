@@ -219,7 +219,6 @@ bool SplayTree::isBalanced(EATNode* node) {
   // In a splay tree, balance is not explicitly maintained like in AVL trees.
   // However, for understanding, we can define a height difference check here.
   // This is not a strict requirement, and splaying ensures amortized efficiency.
-
   if (node == nullptr) {
     return true;
   }
@@ -244,6 +243,10 @@ int SplayTree::getHeight(EATNode* node) {
   int rightHeight = getHeight(node->right);
 
   return 1 + std::max(leftHeight, rightHeight);
+}
+
+bool SplayTree::isBalanced(){
+    return isBalanced(root);
 }
 
 void SplayTree::visualize() {

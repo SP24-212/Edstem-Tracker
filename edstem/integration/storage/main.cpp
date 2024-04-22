@@ -207,15 +207,15 @@ int main(int argc, char* argv[]) {
             
             st->printSplayTree();
 
-            // std::cout << "Checking if the splay tree is balanced..." << std::endl;
-            // // check if the AVL tree is balanced
-            // if (st->isBalanced()) {
-            //     std::cout << "The splay tree is balanced." << std::endl;
-            // } else {
-            //     std::cout << "The splay tree is not balanced." << std::endl;
-            // }
+            std::cout << "Checking if the splay tree is balanced..." << std::endl;
+            // check if the AVL tree is balanced
+            if (st->isBalanced()) {
+                std::cout << "The splay tree is balanced." << std::endl;
+            } else {
+                std::cout << "The splay tree is not balanced." << std::endl;
+            }
 
-            // Ask the user if they would like to visualize the st tree
+            //Ask the user if they would like to visualize the st tree
             std::string visualize_st;
             std::cout << "Would you like to visualize the st tree? (y or n): ";
             std::cin >> visualize_st;
