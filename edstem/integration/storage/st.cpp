@@ -214,6 +214,38 @@ void* SplayTree::get_bh_pointer(int key) {
     return nullptr;
 }
 
+// This function is for conceptual understanding only and not used for actual balancing
+bool SplayTree::isBalanced(EATNode* node) {
+  // In a splay tree, balance is not explicitly maintained like in AVL trees.
+  // However, for understanding, we can define a height difference check here.
+  // This is not a strict requirement, and splaying ensures amortized efficiency.
+
+  if (node == nullptr) {
+    return true;
+  }
+
+  int leftHeight = getHeight(node->left);
+  int rightHeight = getHeight(node->right);
+
+  // Here, we define a threshold for the maximum allowed height difference.
+  // You can adjust this value based on your specific needs.
+  int threshold = 1;
+
+  return abs(leftHeight - rightHeight) <= threshold;
+}
+
+// Helper function to get the height of a subtree (can be modified for other definitions)
+int SplayTree::getHeight(EATNode* node) {
+  if (node == nullptr) {
+    return 0;
+  }
+
+  int leftHeight = getHeight(node->left);
+  int rightHeight = getHeight(node->right);
+
+  return 1 + std::max(leftHeight, rightHeight);
+}
+
 void SplayTree::visualize() {
   std::string folderPath = "edstem/integration/edstem-data/";
 
@@ -227,18 +259,28 @@ void SplayTree::visualize() {
   system(("open " + folderPath + "splay.png").c_str());
 }
 
-// Helper function to visualize the splay tree
 void SplayTree::visualizeHelper(EATNode* node, std::ofstream& file) {
-  if (node == nullptr || node->data.first == 0) {
+  if (node == nullptr) {
     return;
   }
-  if (node->left != nullptr && node->left->data.first != 0) {
-    file << node->data.first << " -> " << node->left->data.first << ";" << std::endl;
+  // Create an edge for the left child (even if null)
+  file << node->data.first << " -> ";
+  if (node->left != nullptr) {
+    file << node->left->data.first;
+  } else {
+    file << "null";  // Indicate null child
   }
-  if (node->right != nullptr && node->right->data.first != 0) {
-    file << node->data.first << " -> " << node->right->data.first << ";" << std::endl;
+  file << ";" << std::endl;
+
+  // Create an edge for the right child (even if null)
+  file << node->data.first << " -> ";
+  if (node->right != nullptr) {
+    file << node->right->data.first;
+  } else {
+    file << "null";  // Indicate null child
   }
+  file << ";" << std::endl;
+
   visualizeHelper(node->left, file);
   visualizeHelper(node->right, file);
 }
-

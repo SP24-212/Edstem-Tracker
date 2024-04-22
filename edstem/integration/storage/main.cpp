@@ -204,7 +204,27 @@ int main(int argc, char* argv[]) {
         std::cin >> user_splaytree_str;
 
         if (user_splaytree_str == "y") {
+            
             st->printSplayTree();
+
+            // std::cout << "Checking if the splay tree is balanced..." << std::endl;
+            // // check if the AVL tree is balanced
+            // if (st->isBalanced()) {
+            //     std::cout << "The splay tree is balanced." << std::endl;
+            // } else {
+            //     std::cout << "The splay tree is not balanced." << std::endl;
+            // }
+
+            // Ask the user if they would like to visualize the st tree
+            std::string visualize_st;
+            std::cout << "Would you like to visualize the st tree? (y or n): ";
+            std::cin >> visualize_st;
+            if (visualize_st == "y") {
+                std::cout << "Visualizing the st tree..." << std::endl;
+                st->visualize();
+            } else {
+                std::cout << "You have chosen not to visualize the splay tree." << std::endl;
+            }
         } else {
             std::cout << "You have chosen not to view the splay tree." << std::endl;
         }
@@ -229,6 +249,26 @@ int main(int argc, char* argv[]) {
 
             // print the binary heap
             bh->printBinaryHeap();
+
+            std::cout << "Checking if the bh tree is balanced..." << std::endl;
+            // check if the AVL tree is balanced
+            if (bh->isBalanced()) {
+                std::cout << "The bh tree is balanced." << std::endl;
+            } else {
+                std::cout << "The bh tree is not balanced." << std::endl;
+            }
+
+            // Ask the user if they would like to visualize the bh tree
+            std::string visualize_bh;
+            std::cout << "Would you like to visualize the bh tree? (y or n): ";
+            std::cin >> visualize_bh;
+            if (visualize_bh == "y") {
+                std::cout << "Visualizing the bh tree..." << std::endl;
+                bh->visualize();
+            } else {
+                std::cout << "You have chosen not to visualize the bh tree." << std::endl;
+            }
+
         } else if (user_ds_type == "avl") {
             // print the AVL tree
             avl->printAVLTree();
