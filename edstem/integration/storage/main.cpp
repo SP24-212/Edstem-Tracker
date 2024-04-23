@@ -101,8 +101,8 @@ int main(int argc, char* argv[]) {
             // check if the line starts with bhavl_course_id
             if (line.substr(0, 15) == "bhavl_course_id") {
                 // Extract the course id from the line
-                size_t idStartIndex = line.find(":") + 3; // Find the position of ':' and add 2 to skip it and the space after it
-                size_t idEndIndex = line.find('\n') - 2; // Find the position of newline character
+                int idStartIndex = line.find(":") + 3; // Find the position of ':' and add 2 to skip it and the space after it
+                int idEndIndex = line.find('\n') - 2; // Find the position of newline character
                 std::string courseIdStr = line.substr(idStartIndex, idEndIndex - idStartIndex); // Extract the substring containing the course id
                 int courseId = std::stoi(courseIdStr); // Convert the substring to an integer
 
@@ -220,11 +220,11 @@ int main(int argc, char* argv[]) {
             std::cout << "Please enter the course id you would like to view: ";
             std::cin >> user_course_id;
             // check if the course is true
-            for (int i = 0; i < course_ids.size(); i++) {
+            for (int i = 0; i < (int)course_ids.size(); i++) {
                 if (course_ids[i] == user_course_id) {
                     break;
                 }
-                if (i == course_ids.size() - 1) {
+                if (i == (int)course_ids.size() - 1) {
                     std::cout << "The course id you entered is not valid.\n" << std::endl;
                     std::cout << "Please enter the course id you would like to view: ";
                     std::cin >> user_course_id;

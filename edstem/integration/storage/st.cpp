@@ -177,7 +177,7 @@ void SplayTree::inorderTraversal(EATNode* node) {
     }
     inorderTraversal(node->left);
     std::cout << "Key: " << GREEN << node->data.first << RESET << " [";
-    for (size_t i = 0; i < node->data.second.first.size(); ++i) {
+    for (int i = 0; i < (int)node->data.second.first.size(); ++i) {
         if (i == 1) {
             std::cout << RED << "Course Code: " << RESET << node->data.second.first[i] << " ";
         } else if (i == 2){
