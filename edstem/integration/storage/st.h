@@ -1,5 +1,3 @@
-#include <iostream>
-#include <vector>
 #include "node.h"
 
 #ifndef ST_H
@@ -26,6 +24,7 @@ class SplayTree{
     void rotateLeft(EATNode* node);
     void deleteSplayTree(EATNode* node);
     void inorderTraversal(EATNode* node);
+    EATNode* searchRecursive(EATNode* node, int key);
 
     public:
     /*
@@ -44,6 +43,8 @@ class SplayTree{
     void remove(int key);
     EATNode* search(int key);
     void printSplayTree();
+    void add_bh_pointer(int key, void* ptr);
+    void* get_bh_pointer(int key);
 };
 
 #endif // ST_H

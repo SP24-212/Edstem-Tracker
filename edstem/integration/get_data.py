@@ -1,9 +1,32 @@
-from edapi import EdAPI
+from edapi import EdAPIWL
 from colorama import Fore
 from datetime import datetime
+import os
+
+# Print iterations progress
+def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=50, fill='█', printEnd='\r'):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        length      - Optional  : character length of bar (Int)
+        fill        - Optional  : bar fill character (Str)
+        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = "\033[92m" + fill * filledLength + "\033[0m" + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end=printEnd)
+    # Print New Line on Complete
+    if iteration == total:
+        print()
 
 # initialize Ed API
-ed = EdAPI()
+ed = EdAPIWL()
 # authenticate user through the ED_API_TOKEN environment variable
 ed.login()
 
@@ -19,14 +42,22 @@ courses = user_info['courses']
 # number of courses 
 num_courses = len(courses)
 
-# implement color later
+
+# A List of Items
+items = list(range(0, 57))
+l = len(items)
+
 
 # holds the course id
 courses_with_lessons = []
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+data_file_path = os.path.join(script_dir, "storage/data.txt")
+
+
 
 # we will print the title and challenge id of all lessons with type cpp
-with open("edstem/integration/edstem-data/data.txt", "w") as f:
+with open(data_file_path, "w") as f:
 
   # we need to put the course data in then the lesson data
   # iterate through courses
@@ -45,7 +76,9 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
       f.write(f"st_name: '{course['course']['name']}'\n")
       f.write(f"st_lessons: 'True'\n")
   # we iterate through the lessons in the courses with lessons
-
+  total_lessons = sum([len(ed.list_lessons(course_id)['lessons']) for course_id in courses_with_lessons])
+  processed_lessons = 0
+  printProgressBar(0, total_lessons, prefix = 'Progress:', suffix = 'Complete', length = 50)
   for k in range(len(courses_with_lessons)):
 
     ed_lesson = ed.list_lessons(courses_with_lessons[k])
@@ -54,6 +87,9 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
     num_lessons = len(ed_lesson['lessons'])
     
     for i in range(num_lessons):
+      # Update Progress Bar
+      processed_lessons += 1
+      printProgressBar(processed_lessons, total_lessons, prefix='Progress:', suffix='Complete', length=50)
       if ed_lesson['lessons'][i]['type'] != 'general':
         
 
@@ -138,17 +174,17 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
       # FOR GENERAL LESSONS
       else:
 
-        f.write(f"bhavl_course_id: {courses_with_lessons[k]}\n")
-        f.write(f"bhavl_lesson_id: {str(ed_lesson['lessons'][i]['id'])}\n")
+        f.write(f"bhavl_course_id: '{courses_with_lessons[k]}'\n")
+        f.write(f"bhavl_lesson_id: '{str(ed_lesson['lessons'][i]['id'])}'\n")
         try:
-          f.write(f"bhavl_due_at: {datetime.fromisoformat(ed_lesson['lessons'][i]['due_at']).strftime('%Y-%m-%d %H:%M:%S')}\n")
+          f.write(f"bhavl_due_at: '{datetime.fromisoformat(ed_lesson['lessons'][i]['due_at']).strftime('%Y-%m-%d %H:%M:%S')}'\n")
         except:
-          f.write(f"bhavl_due_at: Unavailable\n")
+          f.write(f"bhavl_due_at: 'Unavailable'\n")
         
         # Print out the rest of the information
-        f.write(f"bhavl_type: {ed_lesson['lessons'][i]['type']}\n")
-        f.write(f"bhavl_openable: {ed_lesson['lessons'][i]['openable']}\n")
-        f.write(f"bhavl_title: {ed_lesson['lessons'][i]['title']}\n")
+        f.write(f"bhavl_type: '{ed_lesson['lessons'][i]['type']}'\n")
+        f.write(f"bhavl_openable: '{ed_lesson['lessons'][i]['openable']}'\n")
+        f.write(f"bhavl_title: '{ed_lesson['lessons'][i]['title']}'\n")
 
         # get the lesson content
         lesson_content = ed.get_lesson_content(ed_lesson['lessons'][i]['id'])
@@ -169,10 +205,8 @@ with open("edstem/integration/edstem-data/data.txt", "w") as f:
             user_score += marking_info['lesson_markable_marking_status'][j]['count_marked'] # kinda weird but we can keep this here for now
 
         # print the user's score and the total possible score
-          f.write(f"bhavl_user_score: {user_score}\n")
-          f.write(f"bhavl_potential_score: {possible_score}\n")
-
-
+          f.write(f"bhavl_user_score: '{user_score}'\n")
+          f.write(f"bhavl_potential_score: '{possible_score}'\n")
 
 # tell user the data is now being stored and sorted
 print(Fore.GREEN + "Data has been stored and sorted" + Fore.RESET)

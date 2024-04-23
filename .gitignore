@@ -4,7 +4,7 @@
 edstem/tests/
 
 # edstem data file
-edstem/integration/edstem-data/data.txt
+edstem/integration/storage/data.txt
 
 # cpp executables
 edstem/integration/storage/store-data
@@ -17,3 +17,26 @@ edstem/integration/storage/store-data
 
 # .DS_Store
 .DS_Store
+
+
+/edstem/integration/storage/store-data
+
+# images
+edstem/integration/avl.dot
+edstem/integration/avl.png
+
+
+# python script
+output
+
+# edstem_assignment_tracker.egg-info
+/edstem_assignment_tracker.egg-info
+
+# virtual environment
+/venv
+
+# dist
+/dist
+
+# manifest.in
+MANIFEST.in

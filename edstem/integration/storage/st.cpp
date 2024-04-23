@@ -1,5 +1,9 @@
 #include "st.h"
 
+#define RESET   "\033[0m"
+#define GREEN   "\033[32m"
+
+
 // Constructor
 SplayTree::SplayTree() {
     this->root = nullptr;
@@ -13,7 +17,6 @@ SplayTree::~SplayTree() {
 
 // Splay function
 void SplayTree::splay(EATNode* node) {
-    
     while (node != root) {
         if (node->parent == root) {
             // Zig case
@@ -50,7 +53,6 @@ void SplayTree::splay(EATNode* node) {
     // After splay, the given node becomes the root
     root = node;
 }
-
 
 // Find node function
 EATNode* SplayTree::findNode(int key) {
@@ -112,20 +114,14 @@ void SplayTree::rotateLeft(EATNode* node) {
 
 // Insert function
 void SplayTree::insert(EATNode* node) {
-    /*
-    We will create a node with the given key and contents an insert it into the splay tree.
-    */
-
-    // we need to check if the root is null - if it is we will set the root to the node
     if (root == nullptr) {
         root = node;
         return;
     }
     
-    // Otherwise, find the appropriate position to insert the node
-    EATNode* current = root; // Start from the root
-    EATNode* parent = nullptr; // Parent of the current node
-    while (current != nullptr) { // Traverse the tree to find the appropriate position
+    EATNode* current = root;
+    EATNode* parent = nullptr;
+    while (current != nullptr) {
         parent = current;
         if (node->data.first < current->data.first) {
             current = current->left;
@@ -134,14 +130,12 @@ void SplayTree::insert(EATNode* node) {
         }
     }
 
-    // Insert the node as a child of the appropriate parent
     if (node->data.first < parent->data.first) {
         parent->left = node;
     } else {
         parent->right = node;
     }
     node->parent = parent;
-    // After insertion, splay the newly inserted node to the root
     splay(node);
 }
 
@@ -151,9 +145,29 @@ void SplayTree::remove(int key) {
 }
 
 // Search function
-EATNode* SplayTree::search(int key) {
-    // Implement search function
-    return nullptr;
+EATNode* SplayTree::search(int key) { 
+    return searchRecursive(root, key);
+}
+
+//Recursive private method search function
+EATNode* SplayTree::searchRecursive(EATNode* node, int key){
+    if (node == nullptr || node->data.first == key) {
+        return node; // Return the node if found
+    }
+
+    if (key < node->data.first) {  
+        return searchRecursive(node->left, key);
+    } else {
+        return searchRecursive(node->right, key);
+    }
+}
+
+void SplayTree::add_bh_pointer(int key, void* ptr) {
+    EATNode* node = search(key); // Assuming `search` function is correctly implemented
+
+    if (node != nullptr) {
+        node->data.second.second = ptr; // Assign the pointer to the second part of the data pair
+    }
 }
 
 // Helper function for inorder traversal
@@ -162,14 +176,17 @@ void SplayTree::inorderTraversal(EATNode* node) {
         return;
     }
     inorderTraversal(node->left);
-    std::cout << "Key: " << node->data.first << ", Contents: ";
-    for (size_t i = 0; i < node->data.second.size(); ++i) {
-        std::cout << node->data.second[i];
-        if (i != node->data.second.size() - 1) {
-            std::cout << ", ";
+    std::cout << "Key: " << GREEN << node->data.first << RESET << " [";
+    for (size_t i = 0; i < node->data.second.first.size(); ++i) {
+        if (i == 1) {
+            std::cout << RED << "Course Code: " << RESET << node->data.second.first[i] << " ";
+        } else if (i == 2){
+            std::cout << RED << "Course Title: " << RESET << node->data.second.first[i] << " ";
+        } else if (i == 3){
+            std::cout << RED << "Contains Lessons: " << RESET << node->data.second.first[i];
         }
     }
-    std::cout << std::endl;
+    std::cout << "]" << std::endl;
     inorderTraversal(node->right);
 }
 
@@ -188,4 +205,15 @@ void SplayTree::deleteSplayTree(EATNode* node) {
     deleteSplayTree(node->right);
     delete node;
 }
+
+// Function to get the pointer of the binary heap
+void* SplayTree::get_bh_pointer(int key) {
+    EATNode* node = search(key); // Assuming `search` function is correctly implemented
+
+    if (node != nullptr) {
+        return node->data.second.second; // Return the pointer
+    }
+    return nullptr;
+}
+
 
