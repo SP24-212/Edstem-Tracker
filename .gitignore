@@ -3,6 +3,12 @@
 # tests folder
 edstem/tests/
 
+# edstem data file
+edstem/integration/storage/data.txt
+
+# cpp executables
+edstem/integration/storage/store-data
+
 # .VSCode
 .vscode/
 
@@ -12,5 +18,25 @@ edstem/tests/
 # .DS_Store
 .DS_Store
 
-/edstem/integration/edstem-data/data.txt
+
 /edstem/integration/storage/store-data
+
+# images
+edstem/integration/avl.dot
+edstem/integration/avl.png
+
+
+# python script
+output
+
+# edstem_assignment_tracker.egg-info
+/edstem_assignment_tracker.egg-info
+
+# virtual environment
+/venv
+
+# dist
+/dist
+
+# manifest.in
+MANIFEST.in
