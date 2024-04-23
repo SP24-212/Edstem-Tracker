@@ -24,16 +24,18 @@ A Binary Heap is a self balancing data structure that acts very similarly to a p
 ```mermaid
 classDiagram
 class BinaryHeap {
-  -std::vector<EATNode*> heap
-  -int heapSize
-  -void resize(int newSize)
-  -void heapify(int index)
-  +BinaryHeap()
-  +~BinaryHeap()
-  +void insert(int key, std::vector<std::string> contents)
-  +EATNode* find(int key)
-  +EATNode* extractMin()
-  +void printBinaryHeap()
+  - heap: vector<EATNode*>
+  - heapSize: int
+  + BinaryHeap()
+  + ~BinaryHeap()
+  + insert(EATNode*)
+  + find(int): EATNode*
+  + extractMin(): EATNode*
+  + printBinaryHeap(int)
+  + printFilters()
+  + filterBinaryHeap(int)
+  + checkCol(int, int)
+  + printAllTypes()
 }
 ```
 
@@ -44,22 +46,33 @@ class BinaryHeap {
 ```mermaid
 classDiagram
 class SplayTree {
-  -EATNode* root
-  -void splay(EATNode* node)
-  -EATNode* findNode(int key)
-  -void rotateRight(EATNode* node)
-  -void rotateLeft(EATNode* node)
-  -void deleteSplayTree(EATNode* node)
-  -void inorderTraversal(EATNode* node)
-  +SplayTree()
-  +~SplayTree()
-  +void insert(EATNode* node)
-  +void remove(int key)
-  +EATNode* search(int key)
-  +void printSplayTree()
+  - root: EATNode*
+  + SplayTree()
+  + ~SplayTree()
+  + insert(EATNode*)
+  + remove(int)
+  + search(int): EATNode*
+  + printSplayTree()
+  + add_bh_pointer(int, void*)
+  + get_bh_pointer(int): void*
 }
 ```
 ---
 ### AVL Tree
 
 
+#### Class Diagram
+```mermaid
+classDiagram
+class AVLTree {
+  - root: EATNode*
+  + AVLTree()
+  + ~AVLTree()
+  + search(int): EATNode*
+  + insert(EATNode*)
+  + printAVLTree(int)
+  + isBalanced(): bool
+  + printFilters()
+  + printAllTypes()
+}
+```

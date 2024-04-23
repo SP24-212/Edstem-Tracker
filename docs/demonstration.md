@@ -1,5 +1,0 @@
-# Demonstration of project
-
-
-
-
