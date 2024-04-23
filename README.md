@@ -2,7 +2,7 @@
 
 ## Description
 <!-- Description of the project -->
-Our project for CSC 212 is a grade/assignment tracker for CSC 212. We will be using Edstem based APIs to interact with Edstem and collect information on Edstem to provide an easy method for tracking assignments in the course.
+Our project for CSC 212 is a grade/assignment tracker for CSC 212. We will be using an Edstem based API to interact with Edstem and collect information on Edstem to provide an easy method for tracking assignments in the course.
 
 This project uses a modified version of edapi called [edapiwl](docs/api_doc.md)(wl: with lessons). We Use this API to collect data from the user and we then store the data in various data structures.
 
