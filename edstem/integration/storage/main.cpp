@@ -182,6 +182,10 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    // create the last node
+    EATNode* node = new EATNode(bhavl_lesson_key, bhavl_lesson_data);
+    bh->insert(node);
+    avl->insert(node);
 
 
 

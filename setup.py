@@ -2,7 +2,11 @@ from setuptools import setup
 
 setup(
     name='edstem-assignment-tracker',
+<<<<<<< HEAD
     version='1.1.0',
+=======
+    version='1.0.48',
+>>>>>>> 455b69da7127e95053045e1ce1f64ba9c4896f15
     description='Edstem Assignment Tracker.',
     long_description='Edstem Assignment Tracker is a python package that allows you to easily track your assignments for the Edstem platform. It is a CLI tool that allows you to seamlessly interact with your edstem assignments and view information such as grades, due dates, and more.',
     author='Trevor Moy',
